@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
-    android:layout_marginLeft="24dp"
+    android:layout_width="355dp"
+    android:layout_height="180dp"
     android:layout_marginTop="18dp"
-    android:layout_width="311.64dp"
-    android:layout_height="166dp"
-    android:orientation="horizontal"
-    android:padding="4dp">
+    android:orientation="horizontal">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,16 +19,16 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:textSize="13sp"
-            android:text="자산코드" />
+            android:text="자산코드"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:id="@+id/ast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/ast_cd"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:gravity="bottom"
             android:orientation="horizontal">
 
@@ -41,6 +39,7 @@
                 android:layout_marginRight="101dp"
                 android:text="자산상세명"
                 android:textSize="26sp" />
+
             <TextView
                 android:id="@+id/checked"
                 android:layout_width="wrap_content"
@@ -48,11 +47,12 @@
                 android:layout_marginRight="10dp"
                 android:text="미확인"
                 android:textSize="16sp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:src="@drawable/icon_frame_back"/>
+                android:src="@drawable/icon_frame_back" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,18 +63,20 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_marginRight="41dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:text="사용자"/>
+                android:layout_marginRight="41dp"
+                android:text="사용자"
+                android:textSize="13sp" />
+
             <TextView
                 android:id="@+id/empe_nm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="조영재"/>
+                android:text="조영재"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,20 +84,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/user"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_marginRight="30dp"
+                android:id="@+id/check_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:text="확인일자"/>
+                android:layout_marginRight="30dp"
+                android:text="확인일자"
+                android:textSize="13sp" />
+
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="2020.12.21"/>
+                android:text="2020.12.21"
+                android:textSize="14sp" />
         </LinearLayout>
     </RelativeLayout>
 
