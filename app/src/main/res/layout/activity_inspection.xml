@@ -71,11 +71,13 @@
     </LinearLayout>
 
     <ListView
+        android:background="#F3F4F6"
         android:id="@+id/list_item"
+        android:paddingLeft="23dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/search"
-        android:padding="72px">
+        android:layout_below="@+id/search"
+        android:layout_centerHorizontal="true">
 
     </ListView>
 </RelativeLayout>

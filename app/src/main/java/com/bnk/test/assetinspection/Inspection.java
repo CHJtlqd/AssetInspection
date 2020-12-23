@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 public class Inspection extends AppCompatActivity {
@@ -14,7 +16,7 @@ public class Inspection extends AppCompatActivity {
             new MyData("1000001-102", "냉장고", "가나다", "2020.12.20"),
             new MyData("1000002-101", "TV", "홍길동", "2020.12.25"),
             new MyData("1000003-101", "컴퓨터", "최홍준", "2020.12.22"),
-            new MyData("1000007-101", "노트북", "", "")
+            new MyData("1000007-101", "노트북", "강감찬", "")
     };
     private CardAdapter cAdapter;
     private ListView lView;
