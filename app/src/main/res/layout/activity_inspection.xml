@@ -51,6 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/period"
         android:layout_marginTop="1dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal">
 
         <EditText
@@ -71,13 +73,15 @@
     </LinearLayout>
 
     <ListView
-        android:background="#F3F4F6"
         android:id="@+id/list_item"
-        android:paddingLeft="23dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/search"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:background="#F3F4F6"
+        android:divider="@null"
+        android:dividerHeight="6dp"
+        android:paddingLeft="23dp">
 
     </ListView>
 </RelativeLayout>
