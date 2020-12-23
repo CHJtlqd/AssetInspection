@@ -9,29 +9,49 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "AX_SVYM_TMRD")
-public class AX_SVYM_TMRD {
+public class AxSvymTmrd {
     @PrimaryKey
     @ColumnInfo(name = "AX_SVYM_TMRD_ID")
     public long axSvymTmrdId;
-
+    /**
+     * 회차 실행 연도
+     */
     @ColumnInfo(name = "ASVY_YY")
     public String asvyYy;
 
+    /**
+     * 회차
+     */
     @ColumnInfo(name = "ASVY_TMRD")
     public int asvyTmrd;
 
+    /**
+     * 회차명
+     */
     @ColumnInfo(name = "ASVY_TMRD_NM")
     public String asvyTmrdNm;
 
+    /**
+     * 시작일자
+     */
     @ColumnInfo(name = "STRDT")
     public String strdt;
 
+    /**
+     * 종료일자
+     */
     @ColumnInfo(name = "EDT")
     public String edt;
 
+    /**
+     * 회차상태
+     */
     @ColumnInfo(name = "TMRD_STCD")
     public String tmrdStcd;
 
+    /**
+     * 확인일자
+     */
     @ColumnInfo(name = "VD_DT")
     public String vdDt;
 }
