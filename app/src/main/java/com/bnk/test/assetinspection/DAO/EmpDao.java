@@ -31,6 +31,11 @@ public interface EmpDao {
             "  FROM EMP ")
     LiveData<List<Emp>> getAllEmp();
 
+    @Query(" SELECT * " +
+            "  FROM EMP " +
+            " WHERE EMP_NO = :empNo ")
+    Emp getEmpByEmpNo(int empNo);
+
     @Insert
     void insertEmp(Emp... emp);
 }

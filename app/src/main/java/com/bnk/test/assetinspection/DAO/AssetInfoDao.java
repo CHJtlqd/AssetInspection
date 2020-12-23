@@ -16,15 +16,14 @@ import java.util.List;
  */
 @Dao
 public interface AssetInfoDao {
-    @Query(" SELECT AxFaxmInfo.*, AxFaxcClsf.* " +
-            "  FROM AX_FAXM_INFO as AxFaxmInfo " +
-            " INNER JOIN AX_FAXC_CLSF as AxFaxcClsf " +
-            "    ON AxFaxmInfo.AX_FAXM_INFO_ID = AxFaxcClsf.AX_FAXC_CLSF_ID ")
-    LiveData<List<AssetInfoDetail>> getAllProduct();
-
-    @Update
-    void updateProduct(AxFaxmInfo axFaxmInfo);    // 비고 변경
-
-    @Insert
-    void insertProduct(AxFaxmInfo axFaxmInfo);
+    @Query(" SELECT INFO.*, CLSF.*, CMDT.*, FLCT.* " +
+            "  FROM AX_FAXM_INFO AS INFO " +
+            " INNER JOIN AX_FAXC_CLSF AS CLSF " +
+            "    ON INFO.AX_FAXM_INFO_ID = CLSF.AX_FAXC_CLSF_ID" +
+            "   AND INFO.AX_FAXM_INFO_ID = :axFaxmInfoId" +
+            " INNER JOIN AX_FAXC_CMDT AS CMDT " +
+            "    ON INFO.AX_FAXC_CMDT_ID = CMDT.AX_FAXC_CMDT_ID " +
+            " INNER JOIN AX_FAXH_FLCT AS FLCT " +
+            "    ON INFO.AX_FAXM_INFO_ID = FLCT.AX_FAXM_INFO_ID ")
+    LiveData<AssetInfoDetail> getAssetInfoDetailById(long axFaxmInfoId);
 }

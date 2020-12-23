@@ -40,7 +40,9 @@ public class AxFaxmInfo {
     @ColumnInfo(name = "AST_CD")
     public String astCd;
 
-    @Ignore
+    /**
+     * 자산명
+     */
     @ColumnInfo(name = "AST_NM")
     public String astNm;
 
@@ -50,6 +52,9 @@ public class AxFaxmInfo {
     @ColumnInfo(name = "AST_DTL_CD")
     public String astDtlCd;
 
+    /**
+     * 자산상세명
+     */
     @Ignore
     @ColumnInfo(name = "AST_DTL_NM")
     public String astDtlNm;

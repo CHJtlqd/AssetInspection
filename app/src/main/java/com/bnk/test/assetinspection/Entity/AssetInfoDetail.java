@@ -22,22 +22,8 @@ public class AssetInfoDetail {
     public AxFaxcCmdt axFaxcCmdt;
 
     /**
-     * 자산관리_고정자산_담당기본
-     */
-    @Embedded(prefix = "CGP_")
-    public AxFaxmCgp axFaxmCgp;
-
-    /**
      * 자산관리_고정자산_변동사항
      */
     @Embedded(prefix = "FLCT_")
     public AxFaxhFlct axFaxhFlct;
-
-    @Override
-    public String toString() {
-        return "INFO_AND_CLSF{" +
-                "axFaxcClsf=" + axFaxcClsf +
-                ", axFaxmInfo=" + axFaxmInfo +
-                '}';
-    }
 }

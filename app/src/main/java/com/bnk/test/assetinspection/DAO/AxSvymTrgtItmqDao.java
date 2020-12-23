@@ -1,15 +1,23 @@
 package com.bnk.test.assetinspection.DAO;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Query;
+import androidx.room.RawQuery;
+import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
+import com.bnk.test.assetinspection.Entity.AxSvymTrgtItmq;
 import com.bnk.test.assetinspection.Entity.InfoAndItmqAndFaxmCgp;
-
+import com.bnk.test.assetinspection.Entity.AxFaxmInfo;
+import com.bnk.test.assetinspection.Entity.AxFaxmCgp;
+import com.bnk.test.assetinspection.Entity.Emp;
 import java.util.List;
 
 /**
  * 회차별 대상항목 조회
  */
+@Dao
 public interface AxSvymTrgtItmqDao {
     /**
      * 액티비티 onCreate 시 전역 객체로 등록된 회차정보의 ID 값을 불러와
@@ -34,11 +42,11 @@ public interface AxSvymTrgtItmqDao {
      * 회차별 대상항목 전체 조회
      * 대상항목 join 고정자산_기본정보 on 기본정보 ID join 고정자산_담당기본 on 기본정보 ID
      */
-    @Query("SELECT * " +
+    @Query("SELECT INFO.*, ITMQ.*, CGP.* " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
-            "INNER JOIN AX_FAXM_CGP AS CGP " +
+            "INNER JOIN AX_FAXM_CGP  AS CGP " +
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
             "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId ")
     LiveData<List<InfoAndItmqAndFaxmCgp>> getAllInfo(long axSvymTmrdId);
@@ -46,24 +54,62 @@ public interface AxSvymTrgtItmqDao {
     /**
      * 회차별 대상항목 By 품목 이름
      */
-    @Query("SELECT * " +
+    @Query("SELECT INFO.*, ITMQ.*, CGP.* " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
             "INNER JOIN AX_FAXM_CGP AS CGP " +
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
-            "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId")
-    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByNm(long axSvymTmrdId);
+            "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
+            "  AND INFO.AST_NM LIKE '%' || :infoNm || '%' ")
+    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByNm(long axSvymTmrdId, String infoNm);
 
     /**
      * 회차별 대상항목 By 사용자 사번
      */
+    @Query("SELECT INFO.*, ITMQ.*, CGP.* " +
+            " FROM AX_FAXM_INFO AS INFO " +
+            "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
+            "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
+            "INNER JOIN AX_FAXM_CGP AS CGP " +
+            "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
+            "  AND CGP.CGP_ID = :empNo ")
+    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByEmpNo(long axSvymTmrdId, int empNo);
 
     /**
      * 회차별 대상항목 By 부서
      */
+    @Query("SELECT INFO.*, ITMQ.*, CGP.* " +
+            " FROM AX_FAXM_INFO AS INFO " +
+            "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
+            "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
+            "INNER JOIN AX_FAXM_CGP AS CGP " +
+            "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
+            "  AND CGP.CGP_DEPT_NM LIKE '%' || :deptNm || '%' ")
+    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByDeptNm(long axSvymTmrdId, String deptNm);
 
     /**
      * 회차별 대상항목 By 확인여부
      */
+    @RawQuery(observedEntities = AxSvymTrgtItmq.class)
+    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByIsCheck(SupportSQLiteQuery query);
+
+    /**
+     * 회차별 대상항목 비고 update
+     */
+    @Update
+    void updateItmq(AxSvymTrgtItmq axSvymTrgtItmq);
+
+    /**
+     * 회차별 대상항목 findOne
+     * 자산상세 액티비티 시작 시 Intent로 넘어온 axFaxmInfoId 값과
+     * 회차 전역객체를 이용하여 자산상세의 내용을 수집
+     */
+    @Query("SELECT * " +
+            " FROM AX_SVYM_TRGT_ITMQ " +
+            "WHERE AX_SVYM_TMRD_ID = :axSvymTmrdId " +
+            "  AND AX_FAXM_INFO_ID = :axFaxmInfoId")
+    AxSvymTrgtItmq findOneItmq(long axSvymTmrdId, long axFaxmInfoId);
 }

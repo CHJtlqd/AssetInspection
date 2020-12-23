@@ -31,7 +31,9 @@ public class AxFaxmCgp {
     @ColumnInfo(name = "CGP_DVCD")
     public String cgpDvcd;
 
-    @Ignore
+    /**
+     * 담당자 부서
+     */
     @ColumnInfo(name = "CGP_DEPT_NM")
     public String cgpDeptNm;
 

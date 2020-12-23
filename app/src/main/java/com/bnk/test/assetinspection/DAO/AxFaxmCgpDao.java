@@ -6,4 +6,5 @@ import androidx.room.Query;
 @Dao
 public interface AxFaxmCgpDao {
 
+
 }
