@@ -6,13 +6,14 @@
     android:layout_height="190dp"
     android:layout_marginLeft="27dp"
     android:layout_marginTop="18dp"
-    android:background="@color/white"
     android:elevation="20dp"
+    android:outlineAmbientShadowColor="#00000029"
     android:orientation="horizontal"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,6 +26,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
+            android:textColor="#666666"
             android:text="자산코드"
             android:textSize="13sp" />
 
@@ -42,7 +44,9 @@
                 android:id="@+id/ast_nm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="101dp"
+                android:layout_marginRight="185dp"
+                android:textStyle="bold"
+                android:textColor="#111111"
                 android:text="자산상세명"
                 android:textSize="26sp" />
 
@@ -51,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
+                android:textColor="#CB2B11"
                 android:text="미확인"
                 android:textSize="16sp" />
 
@@ -74,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="41dp"
+                android:textColor="#666666"
                 android:text="사용자"
                 android:textSize="13sp" />
 
@@ -81,6 +87,7 @@
                 android:id="@+id/empe_nm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#333333"
                 android:text="조영재"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -97,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
+                android:textColor="#666666"
                 android:text="확인일자"
                 android:textSize="13sp" />
 
@@ -104,6 +112,7 @@
                 android:id="@+id/check_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#333333"
                 android:text="2020.12.21"
                 android:textSize="14sp" />
         </LinearLayout>
