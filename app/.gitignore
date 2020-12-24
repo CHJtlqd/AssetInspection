@@ -184,3 +184,6 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+!/src/main/assets/
+!/src/main/assets/
+!/src/main/assets/
