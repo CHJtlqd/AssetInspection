@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:background="#F3F4F6"
     android:orientation="vertical"
-    tools:context=".Inspection">
+    tools:context=".AllAssetList">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="165dp"
+        android:layout_height="128dp"
         android:background="#FFFFFF"
         android:elevation="4dp"
         android:outlineAmbientShadowColor="#000014">
@@ -45,61 +45,18 @@
             android:layout_marginLeft="13dp"
             android:layout_marginTop="18dp"
             android:layout_toRightOf="@+id/arrow"
-            android:text="2020년 1회차 재물조사"
+            android:text="고정자산조회"
             android:textColor="#333333"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <RelativeLayout
-            android:id="@+id/progress"
-            android:layout_width="355dp"
-            android:layout_height="46dp"
-            android:layout_below="@+id/textView"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="14dp"
-            android:background="#FAFAFA"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/ast_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="14dp"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:text="대상항목수"
-                android:textColor="#333333"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/percent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="14dp"
-                android:gravity="center"
-                android:text="1234 / 1587"
-                android:textColor="#333333"
-                android:textSize="22sp" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/period"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/progress"
-            android:gravity="center"
-            android:text="기간 : 2020.12.21 - 2020.11.23" />
-
         <LinearLayout
             android:layout_width="355dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/period"
-            android:layout_marginLeft="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="80dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="horizontal">
@@ -125,7 +82,7 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/list_item"
+        android:id="@+id/all_asset_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"

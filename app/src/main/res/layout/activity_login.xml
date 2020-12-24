@@ -37,21 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/group"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:inputType="textPersonName"
         android:textColor="#111111"
         android:textColorHint="#999999"
         android:textSize="17dp" />
-
-    <View
-        android:layout_width="312dp"
-        android:layout_height="1dp"
-        android:layout_below="@+id/group"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginRight="50dp"
-        android:background="#DDDDDD" />
 
     <TextView
         android:id="@+id/empe"
@@ -59,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/group_nm"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:text="사번"
         android:textColor="#333333"
@@ -70,27 +61,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/empe"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:inputType="textPersonName"
         android:textColor="#111111"
         android:textColorHint="#999999"
         android:textSize="17dp" />
-
-    <View
-        android:layout_width="312dp"
-        android:layout_height="1dp"
-        android:layout_below="@+id/empe"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginRight="50dp"
-        android:background="#DDDDDD" />
 
     <TextView
         android:id="@+id/pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/empe_no"
+        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:text="비밀번호"
@@ -102,21 +84,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pass"
+        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:inputType="textPassword"
         android:textColor="#111111"
         android:textColorHint="#999999" />
 
-    <View
-        android:layout_width="312dp"
-        android:layout_height="1dp"
-        android:layout_below="@+id/pass"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginRight="50dp"
-        android:background="#DDDDDD" />
 
     <LinearLayout
         android:id="@+id/remember"
@@ -148,7 +121,7 @@
 
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginButton"
         android:layout_width="312dp"
         android:layout_height="46dp"
@@ -158,8 +131,11 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
-        android:background="#CB2B11"
+        android:background="@drawable/round_button"
         android:onClick="login"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="18dp"
         android:text="로그인" />
 
 </RelativeLayout>

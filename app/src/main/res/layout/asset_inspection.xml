@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="355dp"
-    android:layout_height="197dp"
+    android:layout_height="190dp"
     android:layout_marginLeft="27dp"
     android:layout_marginTop="18dp"
     android:elevation="20dp"
@@ -17,13 +17,26 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <TextView
+            android:id="@+id/ast_cd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="자산코드"
+            android:textColor="#666666"
+            android:textSize="13sp" />
+
         <RelativeLayout
             android:id="@+id/ast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_below="@id/ast_cd"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="8dp"
             android:gravity="bottom"
             android:orientation="horizontal">
 
@@ -35,6 +48,27 @@
                 android:textColor="#111111"
                 android:textSize="26sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/checked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/arrow"
+                android:text="미확인"
+                android:textColor="#CB2B11"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/icon_frame_back" />
         </RelativeLayout>
 
         <LinearLayout
@@ -43,22 +77,22 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ast"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="41dp"
-                android:text="자산번호"
+                android:text="사용자"
                 android:textColor="#666666"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/ast_cd"
+                android:id="@+id/empe_nm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1010011-101"
+                android:text="조영재"
                 android:textColor="#333333"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -75,55 +109,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
-                android:text="사용자"
+                android:text="확인일자"
                 android:textColor="#666666"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/empe_nm"
+                android:id="@+id/check_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="조영재"
+                android:text="2020.12.21"
                 android:textColor="#333333"
                 android:textSize="14sp" />
         </LinearLayout>
-
-        <view
-            android:layout_above="@+id/ast_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#FFDDDDDD"></view>
-        <LinearLayout
-            android:id="@+id/ast_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/repair_button"
-                android:background="#00ffffff"
-                android:textColor="#999999"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="보수신청" />
-
-            <view
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#FFDDDDDD"></view>
-            <Button
-                android:id="@+id/return_button"
-                android:background="#00ffffff"
-                android:textColor="#999999"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="반납신청" />
-        </LinearLayout>
     </RelativeLayout>
+
 
 </androidx.cardview.widget.CardView>

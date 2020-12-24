@@ -12,7 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Inspection extends AppCompatActivity {
+public class AllAssetList extends AppCompatActivity {
+
     private MyData[] mData = {
             new MyData("1000001-101", "냉장고", "조영재", "2020.12.23"),
             new MyData("1000001-102", "냉장고", "가나다", "2020.12.20"),
@@ -20,7 +21,7 @@ public class Inspection extends AppCompatActivity {
             new MyData("1000003-101", "컴퓨터", "최홍준", "2020.12.22"),
             new MyData("1000007-101", "노트북", "강감찬", "")
     };
-    private InspectionAdapter cAdapter;
+    private AllAssetAdapter allAssetAdapter;
     private ListView lView;
     private Spinner spinner;
     private String searchOption;
@@ -28,17 +29,17 @@ public class Inspection extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inspection);
+        setContentView(R.layout.activity_all_asset_list);
 
-        lView = (ListView) findViewById(R.id.list_item);
-        cAdapter = new InspectionAdapter(this, mData);
-        lView.setAdapter(cAdapter);
+        lView = (ListView) findViewById(R.id.all_asset_list);
+        allAssetAdapter = new AllAssetAdapter(this, mData);
+        lView.setAdapter(allAssetAdapter);
         spinner = (Spinner) findViewById(R.id.spinner);
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(Inspection.this, "선택!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AllAssetList.this, "선택!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
                 startActivity(intent);
             }

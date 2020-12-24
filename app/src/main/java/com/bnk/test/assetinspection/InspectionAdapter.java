@@ -1,18 +1,17 @@
 package com.bnk.test.assetinspection;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class CardAdapter extends BaseAdapter {
+public class InspectionAdapter extends BaseAdapter {
     private Context ctx;
     private MyData[] data;
 
-    public CardAdapter(Context ctx, MyData[] data) {
+    public InspectionAdapter(Context ctx, MyData[] data) {
         this.ctx = ctx;
         this.data = data;
     }
@@ -36,7 +35,7 @@ public class CardAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(ctx);
-            view = inflater.inflate(R.layout.asset_list, viewGroup, false);
+            view = inflater.inflate(R.layout.asset_inspection, viewGroup, false);
         }
 
         TextView ast_cd = (TextView) view.findViewById(R.id.ast_cd);

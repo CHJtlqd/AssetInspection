@@ -24,5 +24,8 @@ public class FirstPage extends AppCompatActivity {
 
     public void listAllAssets(View v) {
         Toast.makeText(v.getContext(), "자산목록", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(), AllAssetList.class);
+        startActivity(intent);
     }
 }
