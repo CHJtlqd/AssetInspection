@@ -8,9 +8,24 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
 @Entity(tableName = "AX_SVYM_TMRD")
 public class AxSvymTmrd {
-    @PrimaryKey
+    @Builder
+    public AxSvymTmrd(String asvyYy, int asvyTmrd, String asvyTmrdNm, String strdt, String edt, String tmrdStcd, String vdDt) {
+        this.asvyYy = asvyYy;
+        this.asvyTmrd = asvyTmrd;
+        this.asvyTmrdNm = asvyTmrdNm;
+        this.strdt = strdt;
+        this.edt = edt;
+        this.tmrdStcd = tmrdStcd;
+        this.vdDt = vdDt;
+    }
+
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "AX_SVYM_TMRD_ID")
     public long axSvymTmrdId;
     /**

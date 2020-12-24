@@ -5,12 +5,23 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 /**
  * 자산관리_고정자산_자산분류코드
  */
+@Data
 @Entity(tableName = "AX_FAXC_CLSF")
 public class AxFaxcClsf {
-    @PrimaryKey
+    @Builder
+    public AxFaxcClsf(String xpnitArtNm, String xpnitDtenNm) {
+        this.xpnitArtNm = xpnitArtNm;
+        this.xpnitDtenNm = xpnitDtenNm;
+    }
+
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "AX_FAXC_CLSF_ID")
     public long axFaxcClsfId;
     /**
@@ -178,10 +189,6 @@ public class AxFaxcClsf {
     @Ignore
     @ColumnInfo(name = "COM_CMM_SYSTEM_ID")
     public String comCmmSystemId;
-
-    public AxFaxcClsf(long axFaxcClsfId) {
-        this.axFaxcClsfId = axFaxcClsfId;
-    }
 
     @Override
     public String toString() {

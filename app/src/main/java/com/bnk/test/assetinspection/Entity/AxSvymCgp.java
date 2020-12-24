@@ -18,7 +18,7 @@ import androidx.room.PrimaryKey;
         childColumns = "CGP_EMP_ID")
 })
 public class AxSvymCgp {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "AX_SVYM_CGP_ID")
     public long axSvymCgpId;
 
@@ -36,5 +36,5 @@ public class AxSvymCgp {
      * 회차 담당자 사번
      */
     @ColumnInfo(name = "CGP_EMP_ID")
-    public long cgpEmpId;
+    public int cgpEmpId;
 }

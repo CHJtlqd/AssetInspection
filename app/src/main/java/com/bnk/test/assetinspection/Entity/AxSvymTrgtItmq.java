@@ -5,16 +5,17 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import lombok.Builder;
+import lombok.Data;
+
 /**
  * 자산관리_재물조사_대상항목
  */
+@Data
 @Entity(tableName = "AX_SVYM_TRGT_ITMQ", foreignKeys = {
         @ForeignKey(entity = Emp.class,
         parentColumns = "EMP_NO",
         childColumns = "VD_APLN"),
-        @ForeignKey(entity = Emp.class,
-        parentColumns = "EMP_NO",
-        childColumns = "VD_PRSN"),
         @ForeignKey(entity = AxSvymTmrd.class,
         parentColumns = "AX_SVYM_TMRD_ID",
         childColumns = "AX_SVYM_TMRD_ID"),
@@ -23,7 +24,16 @@ import androidx.room.PrimaryKey;
         childColumns = "AX_FAXM_INFO_ID")
 })
 public class AxSvymTrgtItmq {
-    @PrimaryKey
+
+    @Builder
+    public AxSvymTrgtItmq(long axSvymTmrdId, long axFaxmInfoId, String trgtStcd, int vdApln) {
+        this.axSvymTmrdId = axSvymTmrdId;
+        this.axFaxmInfoId = axFaxmInfoId;
+        this.trgtStcd = trgtStcd;
+        this.vdApln = vdApln;
+    }
+
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "AX_SVYM_TRGT_ITMQ_ID")
     public long axSvymTrgtItmqId;
 
@@ -49,19 +59,19 @@ public class AxSvymTrgtItmq {
      * 확인 예정자
      */
     @ColumnInfo(name = "VD_APLN")
-    public long vdApln;
+    public int vdApln;
 
     /**
      * 실제 확인자
      */
     @ColumnInfo(name = "VD_PRSN")
-    public long vdPrsn;
+    public int vdPrsn;
 
     /**
      * 확인 일자
      */
     @ColumnInfo(name = "VD_DT")
-    public long vdDt;
+    public String vdDt;
 
     /**
      * 비고

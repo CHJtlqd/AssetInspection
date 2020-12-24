@@ -6,19 +6,36 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import lombok.Builder;
+import lombok.Data;
+
 /**
  * 자산관리_고정자산_기본정보
  */
+
 @Entity(tableName = "AX_FAXM_INFO", foreignKeys = {
         @ForeignKey(entity = AxFaxcClsf.class,
                 parentColumns = "AX_FAXC_CLSF_ID",
                 childColumns = "AX_FAXC_CLSF_ID"),
-        @ForeignKey(entity = AxFaxcCmdt.class,
-        parentColumns = "AX_FAXC_CMDT_ID",
-        childColumns = "AX_FAXC_CMDT_ID")
 })
+@Data
 public class AxFaxmInfo {
-    @PrimaryKey
+    @Builder
+    public AxFaxmInfo(long axfaxcClsfId, String astCd, String astNm, String astDtlCd, String mdlNm, String cmdtSn, String useYn, String rwdAplYn, String aqsDt, String flctLoc, String rmrkCntn) {
+        this.axfaxcClsfId = axfaxcClsfId;
+        this.astCd = astCd;
+        this.astNm = astNm;
+        this.astDtlCd = astDtlCd;
+        this.mdlNm = mdlNm;
+        this.cmdtSn = cmdtSn;
+        this.useYn = useYn;
+        this.rwdAplYn = rwdAplYn;
+        this.aqsDt = aqsDt;
+        this.flctLoc = flctLoc;
+        this.rmrkCntn = rmrkCntn;
+    }
+
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "AX_FAXM_INFO_ID")
     public long axFaxmInfoId;
 
@@ -27,12 +44,6 @@ public class AxFaxmInfo {
      */
     @ColumnInfo(name = "AX_FAXC_CLSF_ID")
     public long axfaxcClsfId;
-
-    /**
-     * 품목코드ID
-     */
-    @ColumnInfo(name = "AX_FAXC_CMDT_ID")
-    public long axFaxcCmdtId;
 
     /**
      * 자산코드
@@ -58,6 +69,29 @@ public class AxFaxmInfo {
     @Ignore
     @ColumnInfo(name = "AST_DTL_NM")
     public String astDtlNm;
+    /**
+     * 모델명
+     */
+    @ColumnInfo(name = "MDL_NM")
+    public String mdlNm;
+
+    /**
+     * 시리얼넘버
+     */
+    @ColumnInfo(name = "CMDT_SN")
+    public String cmdtSn;
+
+    /**
+     * 반납신청여부
+     */
+    @ColumnInfo(name = "USE_YN")
+    public String useYn;
+
+    /**
+     * 보수신청여부
+     */
+    @ColumnInfo(name = "RWD_APL_YN")
+    public String rwdAplYn;
 
     /**
      * 취득일자
@@ -65,13 +99,15 @@ public class AxFaxmInfo {
     @ColumnInfo(name = "AQS_DT")
     public String aqsDt;
 
+    /**
+     * 변동 위치
+     */
+    @ColumnInfo(name = "FLCT_LOC")
+    public String flctLoc;
+
     @ColumnInfo(name = "RMRK_CNTN")
     public String rmrkCntn;
 
-    public AxFaxmInfo(long axFaxmInfoId, long axfaxcClsfId) {
-        this.axFaxmInfoId = axFaxmInfoId;
-        this.axfaxcClsfId = axfaxcClsfId;
-    }
 
     @Override
     public String toString() {

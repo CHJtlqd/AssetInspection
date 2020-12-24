@@ -23,5 +23,5 @@ public interface AxSvymTmrdDao {
             "  FROM AX_SVYM_TMRD " +
             " WHERE STRDT <= :today " +
             "   AND EDT >= :today ")
-    public AxSvymTmrd getAxSvymTmrd(String today);
+    AxSvymTmrd getAxSvymTmrd(String today);
 }

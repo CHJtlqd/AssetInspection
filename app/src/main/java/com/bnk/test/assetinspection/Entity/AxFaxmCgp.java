@@ -10,6 +10,9 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import lombok.Builder;
+import lombok.Data;
+
 @Entity(tableName = "AX_FAXM_CGP", foreignKeys = {
         @ForeignKey(entity = AxFaxmInfo.class,
                 parentColumns = "AX_FAXM_INFO_ID",
@@ -18,8 +21,15 @@ import androidx.room.PrimaryKey;
                 parentColumns = "EMP_NO",
                 childColumns = "CGP_ID")
 })
+@Data
 public class AxFaxmCgp {
-    @PrimaryKey
+    @Builder
+    public AxFaxmCgp(long axFaxmInfoId, int cgpId) {
+        this.axFaxmInfoId = axFaxmInfoId;
+        this.cgpId = cgpId;
+    }
+
+    @PrimaryKey(autoGenerate = true)
     public long AX_FAXM_CGP_ID;
     /**
      * 고정자산_기본정보 ID
@@ -41,7 +51,7 @@ public class AxFaxmCgp {
      * 담당자 사번
      */
     @ColumnInfo(name = "CGP_ID")
-    public String cgpId;
+    public int cgpId;
     /**
      * 변동일자
      */

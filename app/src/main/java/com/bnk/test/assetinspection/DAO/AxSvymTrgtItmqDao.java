@@ -3,15 +3,11 @@ package com.bnk.test.assetinspection.DAO;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
-import androidx.room.RawQuery;
 import androidx.room.Update;
-import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.bnk.test.assetinspection.Entity.AxSvymTrgtItmq;
 import com.bnk.test.assetinspection.Entity.InfoAndItmqAndFaxmCgp;
-import com.bnk.test.assetinspection.Entity.AxFaxmInfo;
-import com.bnk.test.assetinspection.Entity.AxFaxmCgp;
-import com.bnk.test.assetinspection.Entity.Emp;
+
 import java.util.List;
 
 /**
@@ -26,7 +22,9 @@ public interface AxSvymTrgtItmqDao {
      * @param axSvymTmrdId
      * @return
      */
-    @Query("SELECT COUNT(*) FROM AX_SVYM_TRGT_ITMQ WHERE AX_SVYM_TMRD_ID = :axSvymTmrdId")
+    @Query("SELECT COUNT(*) " +
+            " FROM AX_SVYM_TRGT_ITMQ " +
+            "WHERE AX_SVYM_TMRD_ID = :axSvymTmrdId")
     int countAllTrgtItmq(long axSvymTmrdId);
 
     /**
@@ -35,14 +33,22 @@ public interface AxSvymTrgtItmqDao {
      * @param axSvymTmrdId
      * @return
      */
-    @Query("SELECT COUNT(*) FROM AX_SVYM_TRGT_ITMQ WHERE AX_SVYM_TMRD_ID = :axSvymTmrdId AND VD_DT != null")
+    @Query("SELECT COUNT(*) " +
+            " FROM AX_SVYM_TRGT_ITMQ " +
+            "WHERE AX_SVYM_TMRD_ID = :axSvymTmrdId " +
+            "  AND VD_DT != null")
     LiveData<Integer> countCplTrgtItmq(long axSvymTmrdId);
 
     /**
      * 회차별 대상항목 전체 조회
      * 대상항목 join 고정자산_기본정보 on 기본정보 ID join 고정자산_담당기본 on 기본정보 ID
      */
-    @Query("SELECT INFO.*, ITMQ.*, CGP.* " +
+    @Query("SELECT INFO.AST_NM," +
+            "      INFO.AST_CD," +
+            "      INFO.AST_DTL_CD," +
+            "      ITMQ.VD_DT," +
+            "      ITMQ.TRGT_STCD," +
+            "      ITMQ.VD_PRSN " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
@@ -54,7 +60,12 @@ public interface AxSvymTrgtItmqDao {
     /**
      * 회차별 대상항목 By 품목 이름
      */
-    @Query("SELECT INFO.*, ITMQ.*, CGP.* " +
+    @Query("SELECT INFO.AST_NM," +
+            "      INFO.AST_CD," +
+            "      INFO.AST_DTL_CD," +
+            "      ITMQ.VD_DT," +
+            "      ITMQ.TRGT_STCD," +
+            "      ITMQ.VD_PRSN " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
@@ -67,7 +78,12 @@ public interface AxSvymTrgtItmqDao {
     /**
      * 회차별 대상항목 By 사용자 사번
      */
-    @Query("SELECT INFO.*, ITMQ.*, CGP.* " +
+    @Query("SELECT INFO.AST_NM," +
+            "      INFO.AST_CD," +
+            "      INFO.AST_DTL_CD," +
+            "      ITMQ.VD_DT," +
+            "      ITMQ.TRGT_STCD," +
+            "      ITMQ.VD_PRSN " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
@@ -80,7 +96,12 @@ public interface AxSvymTrgtItmqDao {
     /**
      * 회차별 대상항목 By 부서
      */
-    @Query("SELECT INFO.*, ITMQ.*, CGP.* " +
+    @Query("SELECT INFO.AST_NM," +
+            "      INFO.AST_CD," +
+            "      INFO.AST_DTL_CD," +
+            "      ITMQ.VD_DT," +
+            "      ITMQ.TRGT_STCD," +
+            "      ITMQ.VD_PRSN " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
@@ -91,10 +112,40 @@ public interface AxSvymTrgtItmqDao {
     LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByDeptNm(long axSvymTmrdId, String deptNm);
 
     /**
-     * 회차별 대상항목 By 확인여부
+     * 회차별 대상항목 By 확인여부(확인)
      */
-    @RawQuery(observedEntities = AxSvymTrgtItmq.class)
-    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByIsCheck(SupportSQLiteQuery query);
+    @Query("SELECT INFO.AST_NM," +
+            "      INFO.AST_CD," +
+            "      INFO.AST_DTL_CD," +
+            "      ITMQ.VD_DT," +
+            "      ITMQ.TRGT_STCD," +
+            "      ITMQ.VD_PRSN " +
+            " FROM AX_FAXM_INFO AS INFO " +
+            "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
+            "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
+            "INNER JOIN AX_FAXM_CGP AS CGP " +
+            "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
+            "  AND ITMQ.VD_DT IS NOT NULL")
+    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByIsCheck(long axSvymTmrdId);
+
+    /**
+     * 회차별 대상항목 By 확인여부(미확인)
+     */
+    @Query("SELECT INFO.AST_NM," +
+            "      INFO.AST_CD," +
+            "      INFO.AST_DTL_CD," +
+            "      ITMQ.VD_DT," +
+            "      ITMQ.TRGT_STCD," +
+            "      ITMQ.VD_PRSN " +
+            " FROM AX_FAXM_INFO AS INFO " +
+            "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
+            "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
+            "INNER JOIN AX_FAXM_CGP AS CGP " +
+            "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
+            "  AND VD_DT IS NULL")
+    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByIsNotCheck(long axSvymTmrdId);
 
     /**
      * 회차별 대상항목 비고 update
@@ -111,5 +162,5 @@ public interface AxSvymTrgtItmqDao {
             " FROM AX_SVYM_TRGT_ITMQ " +
             "WHERE AX_SVYM_TMRD_ID = :axSvymTmrdId " +
             "  AND AX_FAXM_INFO_ID = :axFaxmInfoId")
-    AxSvymTrgtItmq findOneItmq(long axSvymTmrdId, long axFaxmInfoId);
+    LiveData<AxSvymTrgtItmq> findOneItmq(long axSvymTmrdId, long axFaxmInfoId);
 }
