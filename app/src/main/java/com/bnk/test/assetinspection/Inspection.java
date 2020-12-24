@@ -2,6 +2,8 @@ package com.bnk.test.assetinspection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,7 +36,14 @@ public class Inspection extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(Inspection.this, "선택!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
+                startActivity(intent);
             }
         });
     }
+
+    public void backArrow(View v) {
+        finish();
+    }
+
 }

@@ -15,6 +15,16 @@
         android:elevation="4dp"
         android:outlineAmbientShadowColor="#000014">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="9dp"
+            android:background="#00FFFFFF"
+            android:onClick="backArrow" />
+
         <ImageButton
             android:id="@+id/arrow"
             android:layout_width="8dp"
@@ -23,6 +33,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="22dp"
+            android:onClick="backArrow"
             android:rotationY="180"
             app:srcCompat="@drawable/icon_frame_back" />
 
@@ -110,6 +121,7 @@
                 android:textColorHint="#999999"
                 android:textSize="14sp" />
         </LinearLayout>
+
     </RelativeLayout>
 
     <ListView
