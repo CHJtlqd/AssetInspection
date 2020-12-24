@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".AssetDetail"></activity>
-        <activity android:name=".Inspection" />
-        <activity android:name=".FirstPage" />
-        <activity android:name=".Login" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".AssetDetail" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Inspection" android:screenOrientation="portrait"/>
+        <activity android:name=".FirstPage" android:screenOrientation="portrait"/>
+        <activity android:name=".Login" android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
