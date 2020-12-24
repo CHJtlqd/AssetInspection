@@ -1,65 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".Login">
 
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:text="로그인"
+        android:textColor="#111111"
+        android:textSize="32dp"
+        android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/empeNo"
+    <TextView
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="45dp"
+        android:text="그룹사"
+        android:textColor="#333333"
+        android:textSize="13dp" />
+
+    <EditText
+        android:id="@+id/group_nm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/group"
+        android:layout_marginLeft="30dp"
+        android:inputType="textPersonName"
+        android:textColor="#111111"
+        android:textColorHint="#999999"
+        android:textSize="17dp" />
+
+    <View
+        android:layout_width="312dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/group"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="50dp"
+        android:background="#DDDDDD" />
+
+    <TextView
+        android:id="@+id/empe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/group_nm"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="사번"
+        android:textColor="#333333"
+        android:textSize="13dp" />
+
+    <EditText
+        android:id="@+id/empe_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/empe"
+        android:layout_marginLeft="30dp"
+        android:inputType="textPersonName"
+        android:textColor="#111111"
+        android:textColorHint="#999999"
+        android:textSize="17dp" />
+
+    <View
+        android:layout_width="312dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/empe"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="50dp"
+        android:background="#DDDDDD" />
+
+    <TextView
+        android:id="@+id/pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/empe_no"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="비밀번호"
+        android:textColor="#333333"
+        android:textSize="13dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pass"
+        android:layout_marginLeft="30dp"
+        android:inputType="textPassword"
+        android:textColor="#111111"
+        android:textColorHint="#999999" />
+
+    <View
+        android:layout_width="312dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/pass"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="50dp"
+        android:background="#DDDDDD" />
+
+    <LinearLayout
+        android:id="@+id/remember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/remember_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="사번"
-            android:inputType="textPersonName" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="사번저장"
+            android:textColor="#999999" />
 
-        <EditText
-            android:id="@+id/password"
+        <CheckBox
+            android:id="@+id/auto_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="비밀번호"
-            android:inputType="textPassword" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/rememberNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="사번저장" />
-
-            <CheckBox
-                android:id="@+id/autoLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="자동로그인" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="login"
-            android:text="로그인" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="자동로그인"
+            android:textColor="#999999" />
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="312dp"
+        android:layout_height="46dp"
+        android:layout_below="@id/remember"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:background="#CB2B11"
+        android:onClick="login"
+        android:text="로그인" />
+
+</RelativeLayout>

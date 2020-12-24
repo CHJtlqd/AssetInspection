@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
+    private EditText groupNm;
     private EditText empeNo;
     private EditText password;
     private CheckBox rememberNo;
@@ -24,20 +24,23 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        empeNo = (EditText) findViewById(R.id.empeNo);
+        groupNm = (EditText) findViewById(R.id.group_nm);
+        empeNo = (EditText) findViewById(R.id.empe_no);
         password = (EditText) findViewById(R.id.password);
-        rememberNo = (CheckBox) findViewById(R.id.rememberNo);
-        autoLogin = (CheckBox) findViewById(R.id.autoLogin);
+        rememberNo = (CheckBox) findViewById(R.id.remember_no);
+        autoLogin = (CheckBox) findViewById(R.id.auto_login);
 
         /* 프레퍼런스에서 데이터를 읽어온다. */
         if (savedInstanceState == null) {
             SharedPreferences prefs = getSharedPreferences("login_info", 0);
 
+            String groupnm = prefs.getString("groupNm", "");
             String empeno = prefs.getString("empeNo", "");
             String pwd = prefs.getString("password", "");
             boolean rememberno = prefs.getBoolean("rememberNo", false);
             boolean autologin = prefs.getBoolean("autoLogin", false);
 
+            groupNm.setText(groupnm);
             if (rememberno) {
                 empeNo.setText(empeno);
                 password.setText(pwd);
@@ -75,11 +78,13 @@ public class Login extends AppCompatActivity {
 
         SharedPreferences.Editor editor = prefs.edit();
 
+        String groupnm = groupNm.getText().toString();
         String empeno = empeNo.getText().toString();
         String pwd = password.getText().toString();
         boolean rememberno = rememberNo.isChecked();
         boolean autologin = autoLogin.isChecked();
 
+        editor.putString("groupNm", groupnm);
         if (rememberno) {
             editor.putString("empeNo", empeno);
             editor.putString("password", pwd);
