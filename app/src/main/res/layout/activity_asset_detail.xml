@@ -96,6 +96,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/ast_flct_loc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -119,6 +120,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/ast_dtl_cd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -142,6 +144,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/xpnit_artl_nm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -165,6 +168,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/xpnit_dten_nm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -188,6 +192,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/mdl_nm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -211,6 +216,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/cmdt_sn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -234,6 +240,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/aqs_dt_year"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -284,6 +291,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/ast_cgp_nm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -307,6 +315,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/ast_cgp_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -330,6 +339,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/ast_cgp_dept_nm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -380,6 +390,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/tmrd_vd_dt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -403,6 +414,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/tmrd_cgp_nm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

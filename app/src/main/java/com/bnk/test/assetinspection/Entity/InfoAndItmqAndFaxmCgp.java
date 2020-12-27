@@ -2,6 +2,9 @@ package com.bnk.test.assetinspection.Entity;
 
 import androidx.room.ColumnInfo;
 
+import lombok.ToString;
+
+@ToString
 public class InfoAndItmqAndFaxmCgp {
     @ColumnInfo(name = "AST_NM")
     public String astNm;
@@ -20,4 +23,10 @@ public class InfoAndItmqAndFaxmCgp {
 
     @ColumnInfo(name = "VD_PRSN")
     public String vdPrsn;
+
+    @ColumnInfo(name = "EMP_NM")
+    public String empNm;
+
+    @ColumnInfo(name = "AX_FAXM_INFO_ID")
+    public long axFaxmInfo;
 }
