@@ -44,8 +44,9 @@ public interface EmpDao {
             "  FROM EMP " +
             " WHERE EMP.EMP_NO = (SELECT AX_SVYM_TRGT_ITMQ.VD_PRSN " +
             "                       FROM AX_SVYM_TRGT_ITMQ" +
-            "                      WHERE AX_FAXM_INFO_ID = :axFaxmInfoId)")
-    Emp getTrgtItmqCgp(long axFaxmInfoId);
+            "                      WHERE AX_FAXM_INFO_ID = :axFaxmInfoId " +
+            "                        AND AX_SVYM_TMRD_ID = :axSvymTmrdId)")
+    Emp getTrgtItmqCgp(long axFaxmInfoId, long axSvymTmrdId);
 
 
 

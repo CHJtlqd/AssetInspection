@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.bnk.test.assetinspection.DAO.AssetInfoDao;
+import com.bnk.test.assetinspection.DAO.AxFaxmCgpDao;
 import com.bnk.test.assetinspection.DAO.AxFaxmInfoDao;
 import com.bnk.test.assetinspection.DAO.AxSvymTmrdDao;
 import com.bnk.test.assetinspection.DAO.EmpDao;
@@ -26,6 +27,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract AxSvymTrgtItmqDao axSvymTrgtItmqDao();
     public abstract AxSvymTmrdDao axSvymTmrdDao();
     public abstract AxFaxmInfoDao axFaxmInfoDao();
+    public abstract AxFaxmCgpDao axFaxmCgpDao();
 
     private static AppDataBase appDataBase;
 
