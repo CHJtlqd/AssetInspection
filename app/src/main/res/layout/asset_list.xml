@@ -18,7 +18,7 @@
         android:background="@color/white">
 
         <RelativeLayout
-            android:id="@+id/ast"
+            android:id="@+id/ast_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/ast_nm"
+                android:id="@+id/ast_list_nm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="자산상세명"
@@ -38,10 +38,10 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/user"
+            android:id="@+id/ast_list_cd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ast"
+            android:layout_below="@+id/ast_list"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="19dp"
             android:orientation="horizontal">
@@ -55,7 +55,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/ast_cd"
+                android:id="@+id/ast_cd_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1010011-101"
@@ -66,7 +66,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/user"
+            android:layout_below="@+id/ast_list_cd"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
@@ -80,7 +80,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/empe_nm"
+                android:id="@+id/empe_nm_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="조영재"

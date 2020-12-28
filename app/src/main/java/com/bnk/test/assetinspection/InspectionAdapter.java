@@ -1,6 +1,7 @@
 package com.bnk.test.assetinspection;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,9 +52,11 @@ public class InspectionAdapter extends BaseAdapter {
         if (data[i].check_date.equals("")) {
             check_date.setText("-");
             checked.setText("미확인");
+            checked.setTextColor(Color.parseColor("#CB2B11"));
         } else {
             check_date.setText(data[i].check_date);
             checked.setText("확인");
+            checked.setTextColor(Color.parseColor("#111111"));
         }
 
         return view;

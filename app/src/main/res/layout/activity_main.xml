@@ -47,8 +47,7 @@
         android:layout_below="@+id/version"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="96dp"
-        app:srcCompat="@mipmap/img_main_loading" />
+        android:layout_marginTop="96dp"/>
 
     <TextView
         android:id="@+id/copyright"

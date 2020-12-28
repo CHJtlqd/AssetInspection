@@ -34,7 +34,7 @@ public class AllAssetList extends AppCompatActivity {
         lView = (ListView) findViewById(R.id.all_asset_list);
         allAssetAdapter = new AllAssetAdapter(this, mData);
         lView.setAdapter(allAssetAdapter);
-        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner_list);
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

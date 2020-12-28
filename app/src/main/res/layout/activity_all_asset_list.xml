@@ -16,7 +16,6 @@
         android:outlineAmbientShadowColor="#000014">
 
         <Button
-            android:id="@+id/button"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_alignParentLeft="true"
@@ -26,7 +25,6 @@
             android:onClick="backArrow" />
 
         <ImageButton
-            android:id="@+id/arrow"
             android:layout_width="8dp"
             android:layout_height="14dp"
             android:layout_alignParentLeft="true"
@@ -38,7 +36,6 @@
             app:srcCompat="@drawable/icon_frame_back" />
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentTop="true"
@@ -62,14 +59,14 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinner_list"
                 android:layout_width="84dp"
                 android:layout_height="match_parent"
                 android:entries="@array/inspection_search_option"
                 android:textColor="#111111" />
 
             <EditText
-                android:id="@+id/search_text"
+                android:id="@+id/search_list"
                 android:layout_width="252dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"

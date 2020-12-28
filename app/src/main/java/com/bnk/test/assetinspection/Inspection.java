@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 public class Inspection extends AppCompatActivity {
     private MyData[] mData = {
             new MyData("1000001-101", "냉장고", "조영재", "2020.12.23"),
@@ -40,6 +42,7 @@ public class Inspection extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(Inspection.this, "선택!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
+                intent.putExtra("data", mData[position]);
                 startActivity(intent);
             }
         });

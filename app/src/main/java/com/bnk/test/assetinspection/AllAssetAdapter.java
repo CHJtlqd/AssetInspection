@@ -38,9 +38,9 @@ public class AllAssetAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.asset_list, viewGroup, false);
         }
 
-        TextView ast_cd = (TextView) view.findViewById(R.id.ast_cd);
-        TextView ast_nm = (TextView) view.findViewById(R.id.ast_nm);
-        TextView empe_nm = (TextView) view.findViewById(R.id.empe_nm);
+        TextView ast_cd = (TextView) view.findViewById(R.id.ast_cd_list);
+        TextView ast_nm = (TextView) view.findViewById(R.id.ast_list_nm);
+        TextView empe_nm = (TextView) view.findViewById(R.id.empe_nm_list);
 
         ast_cd.setText(data[i].ast_cd);
         ast_nm.setText(data[i].ast_nm);

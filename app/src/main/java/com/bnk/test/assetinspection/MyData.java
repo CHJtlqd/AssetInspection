@@ -1,6 +1,8 @@
 package com.bnk.test.assetinspection;
 
-public class MyData {
+import java.io.Serializable;
+
+public class MyData implements Serializable {
     public String ast_cd;
     public String ast_nm;
     public String empe_nm;
