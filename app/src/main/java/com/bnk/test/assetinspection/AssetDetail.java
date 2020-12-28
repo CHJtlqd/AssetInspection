@@ -1,9 +1,20 @@
 package com.bnk.test.assetinspection;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,13 +34,28 @@ import com.bnk.test.assetinspection.Util.DateUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+
 public class AssetDetail extends AppCompatActivity {
     private TextView astFlctLoc, astDtlCd, xpnitArtlNm, xpnitDtenNm, mdlNm, cmdtSn, aqsDtYear,
-            astCgpNm, astCgpNo, astCgpDeptNm, tmrdVdDt, tmrdCgpNm, infoVdDt ,rmrkCntn;
+            astCgpNm, astCgpNo, astCgpDeptNm, tmrdVdDt, tmrdCgpNm, infoVdDt, rmrkCntn;
+    private ImageView resultPhoto;
+    private ImageButton addPhoto;
     private AxSvymTrgtItmq axSvymTrgtItmq;
     private AppDataBase dataBase;
     private AxSvymTmrd axSvymTmrd;
     private AssetInfoDetail assetInfoDetail;
+
+ 
+    private File file;
+
+
     private Emp tmrdCgp, cgp, loginUser;
     private AxFaxmCgp axFaxmCgp;
     private RelativeLayout relTmrdVdDt, relTmrdCgpNm,relInfoVdDt;
@@ -37,6 +63,7 @@ public class AssetDetail extends AppCompatActivity {
     private AxFaxmInfo axFaxmInfo;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
     private String today = simpleDateFormat.format(new Date());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +72,7 @@ public class AssetDetail extends AppCompatActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         MyApplication myApplication = (MyApplication) getApplication();
 
         dataBase = AppDataBase.getInstance(this);
@@ -77,6 +104,14 @@ public class AssetDetail extends AppCompatActivity {
 
         infoVdDt = findViewById(R.id.info_vd_dt);
         rmrkCntn = findViewById(R.id.rmrk_cntn);
+
+        resultPhoto = findViewById(R.id.result_photo);
+        addPhoto = findViewById(R.id.add_photo);
+        File sdcard = Environment.getExternalStorageDirectory();
+        file = new File(sdcard.getAbsolutePath() + "/picture1.jpg");
+        addPhoto.setVisibility(View.GONE);
+        resultPhoto.setVisibility(View.GONE);
+
 
         // DB 객체 SELECT
         // 대상품목
@@ -129,7 +164,7 @@ public class AssetDetail extends AppCompatActivity {
             }
         } else if (intent.getStringExtra("check").equals("Inspection")) {
             // 재물조사일 경우
-            if(axSvymTrgtItmq.rmrkCntn!=null) {
+            if (axSvymTrgtItmq.rmrkCntn != null) {
                 rmrkCntn.setText(axSvymTrgtItmq.rmrkCntn);
             }
             relInfoVdDt.setVisibility(View.GONE);
@@ -144,6 +179,7 @@ public class AssetDetail extends AppCompatActivity {
             } else {
                 tmrdVdDt.setText("-");
             }
+            addPhoto.setVisibility(View.VISIBLE);
         }
     }
 
@@ -165,6 +201,20 @@ public class AssetDetail extends AppCompatActivity {
 
             // 업데이트가 필요한지 없는지 확인
             axSvymTrgtItmq.setRmrkCntn(rmrkCntnStr.toString());
+            int size = (int) file.length();
+            byte[] bytes = new byte[size];
+            try {
+                BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+                buf.read(bytes, 0, bytes.length);
+                buf.close();
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            axSvymTrgtItmq.setPicture(bytes);
             axFaxmCgp.flctDt = today;
             axSvymTrgtItmq.setVdPrsn(loginUser.empNo);
             axSvymTrgtItmq.setVdDt(today);
@@ -177,6 +227,7 @@ public class AssetDetail extends AppCompatActivity {
     public static class UpdateAxSyvmTrgtItmq extends AsyncTask<AxSvymTrgtItmq, Void, Void> {
         private AxSvymTrgtItmqDao mAxSvymTrgtItmqDao;
 
+
         UpdateAxSyvmTrgtItmq(AxSvymTrgtItmqDao axSvymTrgtItmqDao){
             mAxSvymTrgtItmqDao = axSvymTrgtItmqDao;
         }
@@ -185,6 +236,34 @@ public class AssetDetail extends AppCompatActivity {
         protected Void doInBackground(AxSvymTrgtItmq... axSvymTrgtItmqs) {
             mAxSvymTrgtItmqDao.updateItmq(axSvymTrgtItmqs[0]);
             return null;
+        }
+    }
+
+
+    public void capture(View v) {
+        intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        intent.putExtra("check", "AssetList");
+        startActivityForResult(intent, 101);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
+            resultPhoto.setVisibility(View.VISIBLE);
+
+            BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
+            bmpFactoryOptions.inJustDecodeBounds = true;
+
+            bmpFactoryOptions.inSampleSize = 8;
+
+            bmpFactoryOptions.inJustDecodeBounds = false;
+            Bitmap bmp = BitmapFactory.decodeFile(file.getAbsolutePath(), bmpFactoryOptions);
+            resultPhoto.setImageBitmap(bmp);
+
+            addPhoto.setVisibility(View.GONE);
         }
     }
 
@@ -215,6 +294,4 @@ public class AssetDetail extends AppCompatActivity {
             return null;
         }
     }
-
-
 }

@@ -80,4 +80,10 @@ public class AxSvymTrgtItmq {
      */
     @ColumnInfo(name = "RMRK_CNTN")
     public String rmrkCntn;
+
+    /**
+     * 사진
+     */
+    @ColumnInfo(name = "PICTURE")
+    public byte[] picture;
 }
