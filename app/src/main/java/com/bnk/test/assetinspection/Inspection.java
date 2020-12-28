@@ -51,7 +51,7 @@ public class Inspection extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 searchOption = (String) parent.getItemAtPosition(position);
-                Toast.makeText(view.getContext(), searchOption, Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent.getContext(), searchOption, Toast.LENGTH_SHORT).show();
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#111111"));
             }
 

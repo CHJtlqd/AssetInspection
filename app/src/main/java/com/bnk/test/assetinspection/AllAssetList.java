@@ -36,20 +36,20 @@ public class AllAssetList extends AppCompatActivity {
         lView.setAdapter(allAssetAdapter);
         spinner = (Spinner) findViewById(R.id.spinner_list);
 
-        lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AllAssetList.this, "선택!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
-                startActivity(intent);
-            }
-        });
+//        lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(AllAssetList.this, "선택!", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
+//                startActivity(intent);
+//            }
+//        });
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 searchOption = (String) parent.getItemAtPosition(position);
-                Toast.makeText(view.getContext(), searchOption, Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent.getContext(), searchOption, Toast.LENGTH_SHORT).show();
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#111111"));
             }
 
