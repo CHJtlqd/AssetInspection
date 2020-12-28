@@ -1,9 +1,11 @@
 package com.bnk.test.assetinspection;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -46,17 +48,8 @@ public class  Inspection extends AppCompatActivity {
         assetCheck = findViewById(R.id.asset_check_count);
         assetAllCount = findViewById(R.id.asset_count);
 
+        // 조회조건 spinner
         searchSpinner = findViewById(R.id.search_inspection);
-        searchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         tmrdNm.setText(tmrd.asvyTmrdNm);
         assetCount = dataBase.axSvymTrgtItmqDao().countAllTrgtItmq(tmrd.axSvymTmrdId);

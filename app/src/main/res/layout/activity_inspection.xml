@@ -122,16 +122,19 @@
 
             <Spinner
                 android:id="@+id/search_inspection"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1.5"
                 android:entries="@array/search_array_inspection"
+                android:spinnerMode="dropdown"
                 android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/search_text"
-                android:layout_width="252dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="19dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
                 android:hint="검색 조건"
                 android:inputType="textPersonName"
                 android:textColorHint="#999999"

@@ -4,20 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bnk.test.assetinspection.DAO.AxFaxmCgpDao;
 import com.bnk.test.assetinspection.DAO.AxFaxmInfoDao;
@@ -34,7 +38,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,24 +45,23 @@ import java.util.Date;
 public class AssetDetail extends AppCompatActivity {
     private TextView astFlctLoc, astDtlCd, xpnitArtlNm, xpnitDtenNm, mdlNm, cmdtSn, aqsDtYear,
             astCgpNm, astCgpNo, astCgpDeptNm, tmrdVdDt, tmrdCgpNm, infoVdDt, rmrkCntn;
+    private Button trgtStcdNormal, trgtStcdBroken;
     private ImageView resultPhoto;
     private ImageButton addPhoto;
     private AxSvymTrgtItmq axSvymTrgtItmq;
     private AppDataBase dataBase;
     private AxSvymTmrd axSvymTmrd;
     private AssetInfoDetail assetInfoDetail;
-
- 
     private File file;
-
-
     private Emp tmrdCgp, cgp, loginUser;
     private AxFaxmCgp axFaxmCgp;
-    private RelativeLayout relTmrdVdDt, relTmrdCgpNm,relInfoVdDt;
+    private RelativeLayout relTmrdVdDt, relTmrdCgpNm, relInfoVdDt;
+    private LinearLayout trgtStcdLayout;
     private Intent intent;
     private AxFaxmInfo axFaxmInfo;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
     private String today = simpleDateFormat.format(new Date());
+    private String trgtStcd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,10 @@ public class AssetDetail extends AppCompatActivity {
         dataBase = AppDataBase.getInstance(this);
 
         // INIT
+        trgtStcdLayout = findViewById(R.id.trgt_stcd_layout);
+        trgtStcdNormal = findViewById(R.id.trgt_stcd_normal);
+        trgtStcdBroken = findViewById(R.id.trgt_stcd_borken);
+        trgtStcd = "01";
         // 자산정보
         astFlctLoc = findViewById(R.id.ast_flct_loc);
         astDtlCd = findViewById(R.id.ast_dtl_cd);
@@ -114,20 +120,20 @@ public class AssetDetail extends AppCompatActivity {
         // 대상품목
         axSvymTrgtItmq = dataBase.axSvymTrgtItmqDao().findOneItmq(axSvymTmrd.axSvymTmrdId, intent.getLongExtra("axFaxmInfo", -1));
         // 대상품목 detail
-        assetInfoDetail = dataBase.assetInfoDao().getAssetInfoDetailById(axSvymTrgtItmq.axFaxmInfoId);
+        assetInfoDetail = dataBase.assetInfoDao().getAssetInfoDetailById(intent.getLongExtra("axFaxmInfo", -1));
         // 대상품목 기본
-        axFaxmInfo = dataBase.axFaxmInfoDao().getOneInfo(axSvymTrgtItmq.axFaxmInfoId);
+        axFaxmInfo = dataBase.axFaxmInfoDao().getOneInfo(intent.getLongExtra("axFaxmInfo", -1));
         // 대상품목 담당자
-        axFaxmCgp = dataBase.axFaxmCgpDao().getOneFaxmCgp(axSvymTrgtItmq.axFaxmInfoId);
+        axFaxmCgp = dataBase.axFaxmCgpDao().getOneFaxmCgp(intent.getLongExtra("axFaxmInfo", -1));
         //실제 확인자
-        tmrdCgp = dataBase.empDao().getTrgtItmqCgp(axSvymTrgtItmq.axFaxmInfoId, axSvymTmrd.axSvymTmrdId);
+        tmrdCgp = dataBase.empDao().getTrgtItmqCgp(intent.getLongExtra("axFaxmInfo", -1), axSvymTmrd.axSvymTmrdId);
         //loginUser
         loginUser = myApplication.getLoginEmp();
 
         setText();
     }
 
-    private void setText(){
+    private void setText() {
         astFlctLoc.setText(assetInfoDetail.flctLoc);
         astDtlCd.setText(assetInfoDetail.astCd + "-" + assetInfoDetail.astDtlCd);
         xpnitArtlNm.setText(assetInfoDetail.xpnitAptlNm);
@@ -137,7 +143,7 @@ public class AssetDetail extends AppCompatActivity {
         aqsDtYear.setText(assetInfoDetail.aqsDt.substring(0, 4));
 
         // 사용자
-        cgp = dataBase.assetInfoDao().getCgp(axSvymTrgtItmq.axFaxmInfoId);
+        cgp = dataBase.assetInfoDao().getCgp(intent.getLongExtra("axFaxmInfo", -1));
         astCgpNm.setText(cgp.empNm);
         astCgpNo.setText(String.valueOf(cgp.empNo));
         astCgpDeptNm.setText(cgp.empDeptNm);
@@ -145,18 +151,19 @@ public class AssetDetail extends AppCompatActivity {
         // 자산상세를 재활용하기 위해서 고정자산과 재물조사를 달리해줌 (layout setText)
         if (intent.getStringExtra("check").equals("AssetList")) {
             // 고정자산일 경우 현황탭이 달라짐
+            trgtStcdLayout.setVisibility(View.GONE);
             relTmrdCgpNm.setVisibility(View.GONE);
             relTmrdVdDt.setVisibility(View.GONE);
 
-            if(axFaxmInfo.getRmrkCntn() != null){
+            if (axFaxmInfo.getRmrkCntn() != null) {
                 rmrkCntn.setText(axFaxmInfo.getRmrkCntn());
             }
 
             // 변동일자
             String vdDt = axFaxmCgp.flctDt;
-            if(vdDt != null){
+            if (vdDt != null) {
                 infoVdDt.setText(DateUtil.dateFormat(vdDt));
-            }else{
+            } else {
                 infoVdDt.setText("-");
             }
         } else if (intent.getStringExtra("check").equals("Inspection")) {
@@ -179,7 +186,7 @@ public class AssetDetail extends AppCompatActivity {
 
             if (axSvymTrgtItmq.getPicture() == null) {
                 addPhoto.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 resultPhoto.setVisibility(View.VISIBLE);
                 BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
                 bmpFactoryOptions.inJustDecodeBounds = true;
@@ -187,15 +194,61 @@ public class AssetDetail extends AppCompatActivity {
                 bmpFactoryOptions.inSampleSize = 8;
 
                 bmpFactoryOptions.inJustDecodeBounds = false;
-                Log.d("test", axSvymTrgtItmq.picture.toString());
-                Bitmap bmp = BitmapFactory.decodeByteArray(axSvymTrgtItmq.picture, 0,axSvymTrgtItmq.picture.length, bmpFactoryOptions);
+                Bitmap bmp = BitmapFactory.decodeByteArray(axSvymTrgtItmq.picture, 0, axSvymTrgtItmq.picture.length, bmpFactoryOptions);
                 resultPhoto.setImageBitmap(bmp);
             }
+
+            if (axSvymTrgtItmq.getTrgtStcd() != null) {
+                if (axSvymTrgtItmq.getTrgtStcd().equals("01")) {   //이상없음
+                    trgtStcdOnClick(trgtStcdNormal);
+                } else {
+                    trgtStcdOnClick(trgtStcdBroken);
+                }
+            }
         }
+
+
     }
 
     public void backArrow(View v) {
         finish();
+    }
+
+    public void trgtStcdOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.trgt_stcd_normal:
+                trgtStcd = "01";
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    trgtStcdBroken.setBackground(ContextCompat.getDrawable(this, R.drawable.border));
+                } else {
+                    trgtStcdBroken.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border));
+                }
+                trgtStcdBroken.setTextColor(Color.parseColor("#333333"));
+
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    trgtStcdNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.border_select));
+                } else {
+                    trgtStcdNormal.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border_select));
+                }
+                trgtStcdNormal.setTextColor(Color.parseColor("#CB2B11"));
+                break;
+            case R.id.trgt_stcd_borken:
+                trgtStcd = "02";
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    trgtStcdNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.border));
+                } else {
+                    trgtStcdNormal.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border));
+                }
+                trgtStcdNormal.setTextColor(Color.parseColor("#333333"));
+
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    trgtStcdBroken.setBackground(ContextCompat.getDrawable(this, R.drawable.border_select));
+                } else {
+                    trgtStcdBroken.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border_select));
+                }
+                trgtStcdBroken.setTextColor(Color.parseColor("#CB2B11"));
+                break;
+        }
     }
 
     public void updateDetail(View view) {
@@ -229,7 +282,7 @@ public class AssetDetail extends AppCompatActivity {
             axFaxmCgp.flctDt = today;
             axSvymTrgtItmq.setVdPrsn(loginUser.empNo);
             axSvymTrgtItmq.setVdDt(today);
-
+            axSvymTrgtItmq.setTrgtStcd(trgtStcd);
             new UpdateAxFaxmCgp(dataBase.axFaxmCgpDao()).execute(axFaxmCgp);
             new UpdateAxSyvmTrgtItmq(dataBase.axSvymTrgtItmqDao()).execute(axSvymTrgtItmq);
         }
@@ -240,7 +293,7 @@ public class AssetDetail extends AppCompatActivity {
         private AxSvymTrgtItmqDao mAxSvymTrgtItmqDao;
 
 
-        UpdateAxSyvmTrgtItmq(AxSvymTrgtItmqDao axSvymTrgtItmqDao){
+        UpdateAxSyvmTrgtItmq(AxSvymTrgtItmqDao axSvymTrgtItmqDao) {
             mAxSvymTrgtItmqDao = axSvymTrgtItmqDao;
         }
 
@@ -276,14 +329,14 @@ public class AssetDetail extends AppCompatActivity {
             resultPhoto.setImageBitmap(bmp);
 
             addPhoto.setVisibility(View.GONE);
-            intent.putExtra("check","Inspection");
+            intent.putExtra("check", "Inspection");
         }
     }
 
     public static class UpdateAxFaxmInfo extends AsyncTask<AxFaxmInfo, Void, Void> {
         private AxFaxmInfoDao mAxFaxmInfoDao;
 
-        UpdateAxFaxmInfo(AxFaxmInfoDao axFaxmInfoDao){
+        UpdateAxFaxmInfo(AxFaxmInfoDao axFaxmInfoDao) {
             mAxFaxmInfoDao = axFaxmInfoDao;
         }
 
@@ -297,7 +350,7 @@ public class AssetDetail extends AppCompatActivity {
     public static class UpdateAxFaxmCgp extends AsyncTask<AxFaxmCgp, Void, Void> {
         private AxFaxmCgpDao mAxFaxmCgpDao;
 
-        UpdateAxFaxmCgp(AxFaxmCgpDao axFaxmCgpDao){
+        UpdateAxFaxmCgp(AxFaxmCgpDao axFaxmCgpDao) {
             mAxFaxmCgpDao = axFaxmCgpDao;
         }
 
