@@ -24,7 +24,13 @@ import com.bnk.test.assetinspection.Entity.AxSvymTmrd;
 import com.bnk.test.assetinspection.Entity.AxSvymTrgtItmq;
 import com.bnk.test.assetinspection.Entity.Emp;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 public class AssetDetail extends AppCompatActivity {
     private TextView astFlctLoc, astDtlCd, xpnitArtlNm, xpnitDtenNm, mdlNm, cmdtSn, aqsDtYear,
@@ -156,6 +162,20 @@ public class AssetDetail extends AppCompatActivity {
             // 재물조사일 경우
 //            System.out.println(axSvymTrgtItmq+"++++++++++++++++++");
             axSvymTrgtItmq.setRmrkCntn(rmrkCntnStr.toString());
+            int size = (int) file.length();
+            byte[] bytes = new byte[size];
+            try {
+                BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+                buf.read(bytes, 0, bytes.length);
+                buf.close();
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            axSvymTrgtItmq.setPicture(bytes);
             new UpdateAxSyvmTrgtItmq(dataBase.axSvymTrgtItmqDao()).execute(axSvymTrgtItmq);
         }
         finish();

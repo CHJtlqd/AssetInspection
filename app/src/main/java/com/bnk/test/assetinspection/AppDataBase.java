@@ -19,7 +19,7 @@ import com.bnk.test.assetinspection.Entity.AxSvymTrgtItmq;
 import com.bnk.test.assetinspection.Entity.AxFaxcClsf;
 import com.bnk.test.assetinspection.Entity.Emp;
 
-@Database(entities = {Emp.class, AxFaxcClsf.class, AxFaxmCgp.class, AxFaxmInfo.class, AxSvymCgp.class, AxSvymTmrd.class, AxSvymTrgtItmq.class}, version = 2)
+@Database(entities = {Emp.class, AxFaxcClsf.class, AxFaxmCgp.class, AxFaxmInfo.class, AxSvymCgp.class, AxSvymTmrd.class, AxSvymTrgtItmq.class}, version = 3)
 public abstract class AppDataBase extends RoomDatabase {
     public abstract EmpDao empDao();
     public abstract AssetInfoDao assetInfoDao();
