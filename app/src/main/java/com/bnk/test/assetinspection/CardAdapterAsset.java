@@ -26,8 +26,8 @@ public class CardAdapterAsset extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public InfoAndItmqAndFaxmCgp getItem(int i) {
+        return data.get(i);
     }
 
     @Override

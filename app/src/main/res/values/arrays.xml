@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_array_inspection">
+        <item>확인 여부</item>
+        <item>담당 부서</item>
+        <item>담당자</item>
+        <item>자산명</item>
+    </string-array>
+
+    <string-array name="search_array_asset">
+        <item>담당 부서</item>
+        <item>담당자</item>
+        <item>자산명</item>
+    </string-array>
+</resources>
