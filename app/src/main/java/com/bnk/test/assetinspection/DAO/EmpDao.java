@@ -40,6 +40,12 @@ public interface EmpDao {
             " WHERE EMP_NO = :empNo ")
     Emp getEmpByEmpNo(int empNo);
 
+    @Query(" SELECT * " +
+            "  FROM EMP " +
+            " WHERE EMP.EMP_NO = (SELECT AX_SVYM_TRGT_ITMQ.VD_PRSN " +
+            "                       FROM AX_SVYM_TRGT_ITMQ" +
+            "                      WHERE AX_FAXM_INFO_ID = :axFaxmInfoId)")
+    Emp getTrgtItmqCgp(long axFaxmInfoId);
 
 
 

@@ -63,7 +63,8 @@ public class Login extends AppCompatActivity {
             Toast.makeText(v.getContext(), "아이디, 비밀번호를 확인하세요", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        MyApplication myApplication = (MyApplication) getApplication();
+        myApplication.setLoginEmpeNo(Integer.parseInt(empeno));
         savePref();
 
         Toast.makeText(v.getContext(), "로그인", Toast.LENGTH_SHORT).show();

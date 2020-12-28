@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * 자산관리_재물조사_대상항목
@@ -23,6 +24,7 @@ import lombok.Data;
         parentColumns = "AX_FAXM_INFO_ID",
         childColumns = "AX_FAXM_INFO_ID")
 })
+@ToString
 public class AxSvymTrgtItmq {
 
     @Builder

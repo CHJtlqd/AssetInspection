@@ -28,12 +28,12 @@ public interface AssetInfoDao {
             "       CLSF.XPNIT_DTEN_NM," +
             "       INFO.MDL_NM," +
             "       INFO.CMDT_SN," +
-            "       INFO.AQS_DT " +
+            "       INFO.AQS_DT" +
             "  FROM AX_FAXM_INFO AS INFO " +
             " INNER JOIN AX_FAXC_CLSF AS CLSF " +
-            "    ON INFO.AX_FAXM_INFO_ID = CLSF.AX_FAXC_CLSF_ID" +
+            "    ON INFO.AX_FAXC_CLSF_ID = CLSF.AX_FAXC_CLSF_ID" +
             "   AND INFO.AX_FAXM_INFO_ID = :axFaxmInfoId")
-    LiveData<AssetInfoDetail> getAssetInfoDetailById(long axFaxmInfoId);
+    AssetInfoDetail getAssetInfoDetailById(long axFaxmInfoId);
 
     /**
      * 재물조사_대상품목 사용자 조회
@@ -43,7 +43,7 @@ public interface AssetInfoDao {
             " WHERE EMP_NO = (SELECT CGP_ID " +
             "                   FROM AX_FAXM_CGP " +
             "                  WHERE AX_FAXM_INFO_ID = :axFaxmInfoId)")
-    LiveData<Emp> getCgp(long axFaxmInfoId);
+    Emp getCgp(long axFaxmInfoId);
 
     /**
      * 재물조사_대상품목 현황 -> AxSvymTrgtItmqDao 의 findOneItmq 사용

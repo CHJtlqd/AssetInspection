@@ -48,14 +48,18 @@ public interface AxSvymTrgtItmqDao {
             "      INFO.AST_DTL_CD," +
             "      ITMQ.VD_DT," +
             "      ITMQ.TRGT_STCD," +
-            "      ITMQ.VD_PRSN " +
+            "      ITMQ.VD_PRSN," +
+            "      EMP.EMP_NM," +
+            "      ITMQ.AX_FAXM_INFO_ID " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
             "INNER JOIN AX_FAXM_CGP  AS CGP " +
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "INNER JOIN EMP " +
+            "   ON CGP.CGP_ID = EMP.EMP_NO " +
             "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId ")
-    LiveData<List<InfoAndItmqAndFaxmCgp>> getAllInfo(long axSvymTmrdId);
+    List<InfoAndItmqAndFaxmCgp> getAllInfo(long axSvymTmrdId);
 
     /**
      * 회차별 대상항목 By 품목 이름
@@ -65,15 +69,19 @@ public interface AxSvymTrgtItmqDao {
             "      INFO.AST_DTL_CD," +
             "      ITMQ.VD_DT," +
             "      ITMQ.TRGT_STCD," +
-            "      ITMQ.VD_PRSN " +
+            "      ITMQ.VD_PRSN," +
+            "      EMP.EMP_NM," +
+            "      ITMQ.AX_FAXM_INFO_ID " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
             "INNER JOIN AX_FAXM_CGP AS CGP " +
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "INNER JOIN EMP " +
+            "   ON CGP.CGP_ID = EMP.EMP_NO " +
             "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
             "  AND INFO.AST_NM LIKE '%' || :infoNm || '%' ")
-    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByNm(long axSvymTmrdId, String infoNm);
+    List<InfoAndItmqAndFaxmCgp> getInfoByNm(long axSvymTmrdId, String infoNm);
 
     /**
      * 회차별 대상항목 By 사용자 사번
@@ -83,15 +91,19 @@ public interface AxSvymTrgtItmqDao {
             "      INFO.AST_DTL_CD," +
             "      ITMQ.VD_DT," +
             "      ITMQ.TRGT_STCD," +
-            "      ITMQ.VD_PRSN " +
+            "      ITMQ.VD_PRSN," +
+            "      EMP.EMP_NM," +
+            "      ITMQ.AX_FAXM_INFO_ID " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
             "INNER JOIN AX_FAXM_CGP AS CGP " +
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "INNER JOIN EMP " +
+            "   ON CGP.CGP_ID = EMP.EMP_NO " +
             "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
             "  AND CGP.CGP_ID = :empNo ")
-    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByEmpNo(long axSvymTmrdId, int empNo);
+    List<InfoAndItmqAndFaxmCgp> getInfoByEmpNo(long axSvymTmrdId, int empNo);
 
     /**
      * 회차별 대상항목 By 부서
@@ -101,15 +113,19 @@ public interface AxSvymTrgtItmqDao {
             "      INFO.AST_DTL_CD," +
             "      ITMQ.VD_DT," +
             "      ITMQ.TRGT_STCD," +
-            "      ITMQ.VD_PRSN " +
+            "      ITMQ.VD_PRSN," +
+            "      EMP.EMP_NM," +
+            "      ITMQ.AX_FAXM_INFO_ID " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
             "INNER JOIN AX_FAXM_CGP AS CGP " +
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "INNER JOIN EMP " +
+            "   ON CGP.CGP_ID = EMP.EMP_NO " +
             "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
             "  AND CGP.CGP_DEPT_NM LIKE '%' || :deptNm || '%' ")
-    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByDeptNm(long axSvymTmrdId, String deptNm);
+    List<InfoAndItmqAndFaxmCgp> getInfoByDeptNm(long axSvymTmrdId, String deptNm);
 
     /**
      * 회차별 대상항목 By 확인여부(확인)
@@ -119,15 +135,19 @@ public interface AxSvymTrgtItmqDao {
             "      INFO.AST_DTL_CD," +
             "      ITMQ.VD_DT," +
             "      ITMQ.TRGT_STCD," +
-            "      ITMQ.VD_PRSN " +
+            "      ITMQ.VD_PRSN," +
+            "      EMP.EMP_NM," +
+            "      ITMQ.AX_FAXM_INFO_ID " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
             "INNER JOIN AX_FAXM_CGP AS CGP " +
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "INNER JOIN EMP " +
+            "   ON CGP.CGP_ID = EMP.EMP_NO " +
             "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
             "  AND ITMQ.VD_DT IS NOT NULL")
-    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByIsCheck(long axSvymTmrdId);
+    List<InfoAndItmqAndFaxmCgp> getInfoByIsCheck(long axSvymTmrdId);
 
     /**
      * 회차별 대상항목 By 확인여부(미확인)
@@ -137,15 +157,19 @@ public interface AxSvymTrgtItmqDao {
             "      INFO.AST_DTL_CD," +
             "      ITMQ.VD_DT," +
             "      ITMQ.TRGT_STCD," +
-            "      ITMQ.VD_PRSN " +
+            "      ITMQ.VD_PRSN," +
+            "      EMP.EMP_NM," +
+            "      ITMQ.AX_FAXM_INFO_ID " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +
             "   ON INFO.AX_FAXM_INFO_ID = ITMQ.AX_FAXM_INFO_ID " +
             "INNER JOIN AX_FAXM_CGP AS CGP " +
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
+            "INNER JOIN EMP " +
+            "   ON CGP.CGP_ID = EMP.EMP_NO " +
             "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
             "  AND VD_DT IS NULL")
-    LiveData<List<InfoAndItmqAndFaxmCgp>> getInfoByIsNotCheck(long axSvymTmrdId);
+    List<InfoAndItmqAndFaxmCgp> getInfoByIsNotCheck(long axSvymTmrdId);
 
     /**
      * 회차별 대상항목 비고 update
@@ -162,5 +186,5 @@ public interface AxSvymTrgtItmqDao {
             " FROM AX_SVYM_TRGT_ITMQ " +
             "WHERE AX_SVYM_TMRD_ID = :axSvymTmrdId " +
             "  AND AX_FAXM_INFO_ID = :axFaxmInfoId")
-    LiveData<AxSvymTrgtItmq> findOneItmq(long axSvymTmrdId, long axFaxmInfoId);
+    AxSvymTrgtItmq findOneItmq(long axSvymTmrdId, long axFaxmInfoId);
 }
