@@ -1,12 +1,10 @@
 package com.bnk.test.assetinspection.DAO;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import com.bnk.test.assetinspection.Entity.AssetInfoDetail;
-import com.bnk.test.assetinspection.Entity.AxFaxmCgp;
 import com.bnk.test.assetinspection.Entity.AxFaxmInfo;
 import com.bnk.test.assetinspection.Entity.Emp;
 
@@ -60,18 +58,4 @@ public interface AssetInfoDao {
      */
     @Update
     void updateCmdt(AxFaxmInfo axFaxmInfo);
-
-    /**
-     * 현황 - 변동일자
-     */
-    @Query("SELECT FLCT_DT " +
-            " FROM AX_FAXM_CGP " +
-            "WHERE AX_FAXM_INFO_ID = :axFaxmInfoId")
-    String getFlctDtByInfoId(long axFaxmInfoId);
-
-    /**
-     * 대상항목을 확인하면 고정자산_담당기본 업데이트
-     */
-    @Update
-    void updateCgp(AxFaxmCgp axFaxmCgp);
 }

@@ -1,17 +1,23 @@
 package com.bnk.test.assetinspection;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.bnk.test.assetinspection.Entity.AxSvymTmrd;
 import com.bnk.test.assetinspection.Entity.InfoAndItmqAndFaxmCgp;
+import com.bnk.test.assetinspection.Util.DateUtil;
 
 import java.util.List;
 
@@ -20,17 +26,11 @@ public class  Inspection extends AppCompatActivity {
     private int assetCount;
     private TextView tmrdNm;
     private AxSvymTmrd tmrd;
-    private MyData[] mData = {
-            new MyData("1000001-101", "냉장고", "조영재", "2020.12.23"),
-            new MyData("1000001-102", "냉장고", "가나다", "2020.12.20"),
-            new MyData("1000002-101", "TV", "홍길동", "2020.12.25"),
-            new MyData("1000003-101", "컴퓨터", "최홍준", "2020.12.22"),
-            new MyData("1000007-101", "노트북", "강감찬", "")
-    };
     private CardAdapter cAdapter;
     private ListView lView;
     private AppDataBase dataBase;
-    private List<InfoAndItmqAndFaxmCgp> assetList;
+    private LiveData<List<InfoAndItmqAndFaxmCgp>> assetList;
+    private Spinner searchSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,27 +43,40 @@ public class  Inspection extends AppCompatActivity {
 
         lView = (ListView) findViewById(R.id.list_item);
         tmrdNm = (TextView) findViewById(R.id.textView);
-        tmrdNm.setText(tmrd.asvyTmrdNm);
-
-        assetCount = dataBase.axSvymTrgtItmqDao().countAllTrgtItmq(tmrd.axSvymTmrdId);
-        assetList = dataBase.axSvymTrgtItmqDao().getAllInfo(tmrd.axSvymTmrdId);
-        cAdapter = new CardAdapter(this, assetList);
-        lView.setAdapter(cAdapter);
-
-        lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        searchSpinner = findViewById(R.id.search_inspection);
+        searchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(Inspection.this, "선택!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
-                intent.putExtra("axFaxmInfo", assetList.get(position).axFaxmInfo);
-                intent.putExtra("check","Inspection");
-                startActivity(intent);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
-    }
 
-    public void setInspectionData(){
+        tmrdNm.setText(tmrd.asvyTmrdNm);
+        assetCount = dataBase.axSvymTrgtItmqDao().countAllTrgtItmq(tmrd.axSvymTmrdId);
+        assetList = dataBase.axSvymTrgtItmqDao().getAllInfo(tmrd.axSvymTmrdId);
 
+        assetList.observe(this, new Observer<List<InfoAndItmqAndFaxmCgp>>() {
+            @Override
+            public void onChanged(List<InfoAndItmqAndFaxmCgp> infoAndItmqAndFaxmCgps) {
+                cAdapter = new CardAdapter(Inspection.this, infoAndItmqAndFaxmCgps);
+                lView.setAdapter(cAdapter);
+
+                lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(Inspection.this, "선택!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
+                        intent.putExtra("axFaxmInfo", cAdapter.getItem(position).axFaxmInfo);
+                        intent.putExtra("check","Inspection");
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
     }
 
     public void backArrow(View v) {
