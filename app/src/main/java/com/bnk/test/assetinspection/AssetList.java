@@ -35,14 +35,13 @@ public class AssetList extends AppCompatActivity {
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("++++++++++++++++++");
                 Toast.makeText(AssetList.this, "선택!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
                 intent.putExtra("axFaxmInfo", infoLists.get(position).axFaxmInfo);
+                intent.putExtra("check","AssetList");
                 startActivity(intent);
             }
         });
-
     }
 
     public void backArrow(View v) {

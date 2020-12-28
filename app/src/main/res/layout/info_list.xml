@@ -10,7 +10,8 @@
     android:orientation="horizontal"
     android:outlineAmbientShadowColor="#00000029"
     app:cardCornerRadius="8dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    android:descendantFocusability="blocksDescendants">
 
     <RelativeLayout
         android:layout_width="match_parent"

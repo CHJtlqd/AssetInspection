@@ -377,6 +377,7 @@
                     android:background="#939393" />
 
                 <RelativeLayout
+                    android:id="@+id/rel_tmrd_vd_dt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="13dp"
@@ -400,6 +401,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rel_tmrd_cgp_nm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="13dp"
@@ -446,6 +448,31 @@
                         android:textSize="14sp" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/rel_info_vd_dt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="변동일자"
+                        android:textColor="#666666"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/info_vd_dt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="변동일자"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -472,6 +499,7 @@
                     android:background="#939393" />
 
                 <EditText
+                    android:id="@+id/rmrk_cntn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="13dp"
@@ -483,6 +511,13 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="13dp"
                     android:background="#DDDDDD" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:background="#CB2B11"
+                    android:text="확인"
+                    android:textSize="18dp"
+                    android:onClick="updateDetail"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -9,4 +9,5 @@ import lombok.Data;
 @Data
 public class MyApplication extends Application {
     private AxSvymTmrd axSvymTmrd;
+    private int loginEmpeNo;
 }

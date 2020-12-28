@@ -28,7 +28,7 @@ public interface AssetInfoDao {
             "       CLSF.XPNIT_DTEN_NM," +
             "       INFO.MDL_NM," +
             "       INFO.CMDT_SN," +
-            "       INFO.AQS_DT " +
+            "       INFO.AQS_DT" +
             "  FROM AX_FAXM_INFO AS INFO " +
             " INNER JOIN AX_FAXC_CLSF AS CLSF " +
             "    ON INFO.AX_FAXC_CLSF_ID = CLSF.AX_FAXC_CLSF_ID" +

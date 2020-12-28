@@ -42,4 +42,7 @@ public class AssetInfoDetail {
      */
     @ColumnInfo(name = "FLCT_LOC")
     public String flctLoc;
+
+    @ColumnInfo(name = "FLCT_DT")
+    public String flctDt;
 }

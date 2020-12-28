@@ -56,6 +56,7 @@ public class  Inspection extends AppCompatActivity {
                 Toast.makeText(Inspection.this, "선택!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
                 intent.putExtra("axFaxmInfo", assetList.get(position).axFaxmInfo);
+                intent.putExtra("check","Inspection");
                 startActivity(intent);
             }
         });
