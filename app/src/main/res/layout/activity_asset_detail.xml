@@ -497,7 +497,9 @@
                     android:id="@+id/result_photo"
                     android:layout_width="312dp"
                     android:layout_height="174dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:onClick="capture"
+                    android:scaleType="fitXY" />
 
             </LinearLayout>
 

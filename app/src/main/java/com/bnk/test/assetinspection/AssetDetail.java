@@ -1,8 +1,5 @@
 package com.bnk.test.assetinspection;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,12 +9,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bnk.test.assetinspection.DAO.AxFaxmCgpDao;
@@ -31,15 +30,13 @@ import com.bnk.test.assetinspection.Entity.AxSvymTrgtItmq;
 import com.bnk.test.assetinspection.Entity.Emp;
 import com.bnk.test.assetinspection.Util.DateUtil;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AssetDetail extends AppCompatActivity {
@@ -179,7 +176,21 @@ public class AssetDetail extends AppCompatActivity {
             } else {
                 tmrdVdDt.setText("-");
             }
-            addPhoto.setVisibility(View.VISIBLE);
+
+            if (axSvymTrgtItmq.getPicture() == null) {
+                addPhoto.setVisibility(View.VISIBLE);
+            }else{
+                resultPhoto.setVisibility(View.VISIBLE);
+                BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
+                bmpFactoryOptions.inJustDecodeBounds = true;
+
+                bmpFactoryOptions.inSampleSize = 8;
+
+                bmpFactoryOptions.inJustDecodeBounds = false;
+                Log.d("test", axSvymTrgtItmq.picture.toString());
+                Bitmap bmp = BitmapFactory.decodeByteArray(axSvymTrgtItmq.picture, 0,axSvymTrgtItmq.picture.length, bmpFactoryOptions);
+                resultPhoto.setImageBitmap(bmp);
+            }
         }
     }
 
@@ -218,6 +229,7 @@ public class AssetDetail extends AppCompatActivity {
             axFaxmCgp.flctDt = today;
             axSvymTrgtItmq.setVdPrsn(loginUser.empNo);
             axSvymTrgtItmq.setVdDt(today);
+
             new UpdateAxFaxmCgp(dataBase.axFaxmCgpDao()).execute(axFaxmCgp);
             new UpdateAxSyvmTrgtItmq(dataBase.axSvymTrgtItmqDao()).execute(axSvymTrgtItmq);
         }
@@ -243,7 +255,7 @@ public class AssetDetail extends AppCompatActivity {
     public void capture(View v) {
         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-        intent.putExtra("check", "AssetList");
+
         startActivityForResult(intent, 101);
     }
 
@@ -264,6 +276,7 @@ public class AssetDetail extends AppCompatActivity {
             resultPhoto.setImageBitmap(bmp);
 
             addPhoto.setVisibility(View.GONE);
+            intent.putExtra("check","Inspection");
         }
     }
 

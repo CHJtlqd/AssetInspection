@@ -36,7 +36,7 @@ public interface AxSvymTrgtItmqDao {
     @Query("SELECT COUNT(*) " +
             " FROM AX_SVYM_TRGT_ITMQ " +
             "WHERE AX_SVYM_TMRD_ID = :axSvymTmrdId " +
-            "  AND VD_DT != null")
+            "  AND VD_DT not null")
     LiveData<Integer> countCplTrgtItmq(long axSvymTmrdId);
 
     /**
