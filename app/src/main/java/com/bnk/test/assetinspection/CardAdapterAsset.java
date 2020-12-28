@@ -1,7 +1,6 @@
 package com.bnk.test.assetinspection;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,11 @@ import com.bnk.test.assetinspection.Entity.InfoAndItmqAndFaxmCgp;
 
 import java.util.List;
 
-public class CardAdapter extends BaseAdapter {
+public class CardAdapterAsset extends BaseAdapter {
     private Context ctx;
     private List<InfoAndItmqAndFaxmCgp> data;
 
-    public CardAdapter(Context ctx, List<InfoAndItmqAndFaxmCgp> data) {
+    public CardAdapterAsset(Context ctx, List<InfoAndItmqAndFaxmCgp> data) {
         this.ctx = ctx;
         this.data = data;
     }
@@ -40,26 +39,16 @@ public class CardAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(ctx);
-            view = inflater.inflate(R.layout.asset_list, viewGroup, false);
+            view = inflater.inflate(R.layout.info_list, viewGroup, false);
         }
 
-        TextView ast_cd = (TextView) view.findViewById(R.id.ast_cd);
-        TextView ast_nm = (TextView) view.findViewById(R.id.ast_nm);
-        TextView empe_nm = (TextView) view.findViewById(R.id.empe_nm);
-        TextView check_date = (TextView) view.findViewById(R.id.check_date);
-        TextView checked = (TextView) view.findViewById(R.id.checked);
+        TextView ast_cd = (TextView) view.findViewById(R.id.asset_ast_dtl_cd);
+        TextView ast_nm = (TextView) view.findViewById(R.id.asset_ast_nm);
+        TextView empe_nm = (TextView) view.findViewById(R.id.asset_empe_nm);
 
         ast_cd.setText(data.get(i).astCd+"-"+data.get(i).astDtlCd);
         ast_nm.setText(data.get(i).astNm);
         empe_nm.setText(data.get(i).empNm);
-
-        if (data.get(i).vdDt == null || data.get(i).vdDt.isEmpty()) {
-            check_date.setText("-");
-            checked.setText("미확인");
-        } else {
-            check_date.setText(data.get(i).vdDt);
-            checked.setText("확인");
-        }
 
         return view;
     }

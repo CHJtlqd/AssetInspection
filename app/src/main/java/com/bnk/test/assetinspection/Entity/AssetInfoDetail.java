@@ -3,6 +3,9 @@ package com.bnk.test.assetinspection.Entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 
+import lombok.ToString;
+
+@ToString
 public class AssetInfoDetail {
     /**
      * 자산관리_고정자산_자산분류코드
@@ -39,4 +42,7 @@ public class AssetInfoDetail {
      */
     @ColumnInfo(name = "FLCT_LOC")
     public String flctLoc;
+
+    @ColumnInfo(name = "FLCT_DT")
+    public String flctDt;
 }
