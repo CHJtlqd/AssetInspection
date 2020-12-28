@@ -1,13 +1,22 @@
 package com.bnk.test.assetinspection;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,16 +28,20 @@ import com.bnk.test.assetinspection.Entity.AxSvymTmrd;
 import com.bnk.test.assetinspection.Entity.AxSvymTrgtItmq;
 import com.bnk.test.assetinspection.Entity.Emp;
 
+import java.io.File;
+
 public class AssetDetail extends AppCompatActivity {
     private TextView astFlctLoc, astDtlCd, xpnitArtlNm, xpnitDtenNm, mdlNm, cmdtSn, aqsDtYear,
-            astCgpNm, astCgpNo, astCgpDeptNm, tmrdVdDt, tmrdCgpNm, infoVdDt ,rmrkCntn;
+            astCgpNm, astCgpNo, astCgpDeptNm, tmrdVdDt, tmrdCgpNm, infoVdDt, rmrkCntn;
     private AxSvymTrgtItmq axSvymTrgtItmq;
     private AppDataBase dataBase;
     private AxSvymTmrd axSvymTmrd;
     private AssetInfoDetail assetInfoDetail;
     private Emp tmrdCgp, cgp;
-    private RelativeLayout reltmrdVdDt, reltmrdCgpNm,relInfoVdDt;
+    private RelativeLayout reltmrdVdDt, reltmrdCgpNm, relInfoVdDt;
     private Intent intent;
+    private File file;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +50,7 @@ public class AssetDetail extends AppCompatActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         MyApplication myApplication = (MyApplication) getApplication();
         dataBase = AppDataBase.getInstance(this);
 
@@ -69,9 +82,14 @@ public class AssetDetail extends AppCompatActivity {
         infoVdDt = findViewById(R.id.info_vd_dt);
         rmrkCntn = findViewById(R.id.rmrk_cntn);
         setText();
+
+        File sdcard = Environment.getExternalStorageDirectory();
+        file = new File(sdcard.getAbsolutePath() + "/picture1.jpg");
+        ImageView iv = findViewById(R.id.result_photo);
+        iv.setVisibility(View.GONE);
     }
 
-    private void setText(){
+    private void setText() {
         axSvymTrgtItmq = dataBase.axSvymTrgtItmqDao().findOneItmq(axSvymTmrd.axSvymTmrdId, intent.getLongExtra("axFaxmInfo", -1));
         assetInfoDetail = dataBase.assetInfoDao().getAssetInfoDetailById(axSvymTrgtItmq.axFaxmInfoId);
 
@@ -97,14 +115,14 @@ public class AssetDetail extends AppCompatActivity {
 
             // 변동일자
             String vdDt = dataBase.assetInfoDao().getFlctDtByInfoId(axSvymTrgtItmq.axFaxmInfoId);
-            if(vdDt != null){
+            if (vdDt != null) {
                 infoVdDt.setText(vdDt);
-            }else{
+            } else {
                 infoVdDt.setText("-");
             }
         } else if (intent.getStringExtra("check").equals("Inspection")) {
             // 재물조사일 경우
-            if(axSvymTrgtItmq.rmrkCntn!=null) {
+            if (axSvymTrgtItmq.rmrkCntn != null) {
                 rmrkCntn.setText(axSvymTrgtItmq.rmrkCntn);
             }
             relInfoVdDt.setVisibility(View.GONE);
@@ -143,15 +161,45 @@ public class AssetDetail extends AppCompatActivity {
 
     public static class UpdateAxSyvmTrgtItmq extends AsyncTask<AxSvymTrgtItmq, Void, Void> {
         private AxSvymTrgtItmqDao mAxSvymTrgtItmqDao;
-        UpdateAxSyvmTrgtItmq(AxSvymTrgtItmqDao axSvymTrgtItmqDao){
+
+        UpdateAxSyvmTrgtItmq(AxSvymTrgtItmqDao axSvymTrgtItmqDao) {
             mAxSvymTrgtItmqDao = axSvymTrgtItmqDao;
         }
 
         @Override
         protected Void doInBackground(AxSvymTrgtItmq... axSvymTrgtItmqs) {
-            System.out.println(axSvymTrgtItmqs[0]+"++++++++");
+            System.out.println(axSvymTrgtItmqs[0] + "++++++++");
             mAxSvymTrgtItmqDao.updateItmq(axSvymTrgtItmqs[0]);
             return null;
+        }
+    }
+
+    public void capture(View v) {
+        intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        intent.putExtra("check", "AssetList");
+        startActivityForResult(intent, 101);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
+            ImageView iv = findViewById(R.id.result_photo);
+            iv.setVisibility(View.VISIBLE);
+
+            BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
+            bmpFactoryOptions.inJustDecodeBounds = true;
+
+            bmpFactoryOptions.inSampleSize = 8;
+
+            bmpFactoryOptions.inJustDecodeBounds = false;
+            Bitmap bmp = BitmapFactory.decodeFile(file.getAbsolutePath(), bmpFactoryOptions);
+            iv.setImageBitmap(bmp);
+
+            ImageButton ib = findViewById(R.id.add_photo);
+            ib.setVisibility(View.GONE);
         }
     }
 }
