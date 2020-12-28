@@ -2,8 +2,6 @@ package com.bnk.test.assetinspection;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,9 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bnk.test.assetinspection.DAO.AxSvymTrgtItmqDao;
-import com.bnk.test.assetinspection.DAO.EmpDao;
 import com.bnk.test.assetinspection.Entity.AssetInfoDetail;
-import com.bnk.test.assetinspection.Entity.AxFaxmInfo;
 import com.bnk.test.assetinspection.Entity.AxSvymTmrd;
 import com.bnk.test.assetinspection.Entity.AxSvymTrgtItmq;
 import com.bnk.test.assetinspection.Entity.Emp;
@@ -33,6 +29,8 @@ import java.io.File;
 public class AssetDetail extends AppCompatActivity {
     private TextView astFlctLoc, astDtlCd, xpnitArtlNm, xpnitDtenNm, mdlNm, cmdtSn, aqsDtYear,
             astCgpNm, astCgpNo, astCgpDeptNm, tmrdVdDt, tmrdCgpNm, infoVdDt, rmrkCntn;
+    private ImageView resultPhoto;
+    private ImageButton addPhoto;
     private AxSvymTrgtItmq axSvymTrgtItmq;
     private AppDataBase dataBase;
     private AxSvymTmrd axSvymTmrd;
@@ -81,12 +79,15 @@ public class AssetDetail extends AppCompatActivity {
 
         infoVdDt = findViewById(R.id.info_vd_dt);
         rmrkCntn = findViewById(R.id.rmrk_cntn);
-        setText();
 
+        resultPhoto = findViewById(R.id.result_photo);
+        addPhoto = findViewById(R.id.add_photo);
         File sdcard = Environment.getExternalStorageDirectory();
         file = new File(sdcard.getAbsolutePath() + "/picture1.jpg");
-        ImageView iv = findViewById(R.id.result_photo);
-        iv.setVisibility(View.GONE);
+        addPhoto.setVisibility(View.GONE);
+        resultPhoto.setVisibility(View.GONE);
+
+        setText();
     }
 
     private void setText() {
@@ -138,6 +139,7 @@ public class AssetDetail extends AppCompatActivity {
             } else {
                 tmrdVdDt.setText("-");
             }
+            addPhoto.setVisibility(View.VISIBLE);
         }
     }
 
@@ -186,8 +188,7 @@ public class AssetDetail extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
-            ImageView iv = findViewById(R.id.result_photo);
-            iv.setVisibility(View.VISIBLE);
+            resultPhoto.setVisibility(View.VISIBLE);
 
             BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
             bmpFactoryOptions.inJustDecodeBounds = true;
@@ -196,10 +197,9 @@ public class AssetDetail extends AppCompatActivity {
 
             bmpFactoryOptions.inJustDecodeBounds = false;
             Bitmap bmp = BitmapFactory.decodeFile(file.getAbsolutePath(), bmpFactoryOptions);
-            iv.setImageBitmap(bmp);
+            resultPhoto.setImageBitmap(bmp);
 
-            ImageButton ib = findViewById(R.id.add_photo);
-            ib.setVisibility(View.GONE);
+            addPhoto.setVisibility(View.GONE);
         }
     }
 }
