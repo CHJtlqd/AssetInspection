@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/asset_ast"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="18dp"
             android:orientation="horizontal">
 
             <TextView
@@ -85,6 +85,7 @@
                 android:id="@+id/asset_empe_nm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
                 android:text="조영재"
                 android:textColor="#333333"
                 android:textSize="14sp" />
@@ -93,10 +94,10 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="47dp"
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/asset_user"
-            android:layout_marginTop="28.16dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/border">
 
             <TableRow
@@ -108,11 +109,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/white"
+                    android:background="@drawable/border"
                     android:text="보수신청"
                     android:textColor="#999999"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="15sp" />
 
                 <Button
@@ -120,11 +119,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/white"
+                    android:background="@drawable/border"
                     android:text="반납신청"
                     android:textColor="#999999"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginLeft="1dp"
                     android:textSize="15sp" />
             </TableRow>
         </TableLayout>
