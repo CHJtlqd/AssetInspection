@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bnk.test.assetinspection.Entity.InfoAndItmqAndFaxmCgp;
+import com.bnk.test.assetinspection.Util.DateUtil;
 
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class CardAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public InfoAndItmqAndFaxmCgp getItem(int i) {
+        return data.get(i);
     }
 
     @Override
@@ -55,9 +56,11 @@ public class CardAdapter extends BaseAdapter {
 
         if (data.get(i).vdDt == null || data.get(i).vdDt.isEmpty()) {
             check_date.setText("-");
+            checked.setTextColor(Color.RED);
             checked.setText("미확인");
         } else {
-            check_date.setText(data.get(i).vdDt);
+            check_date.setText(DateUtil.dateFormat(data.get(i).vdDt));
+            checked.setTextColor(Color.BLUE);
             checked.setText("확인");
         }
 

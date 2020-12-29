@@ -1,7 +1,6 @@
 package com.bnk.test.assetinspection.Entity;
 
 import androidx.room.ColumnInfo;
-import androidx.room.Embedded;
 
 import lombok.ToString;
 
