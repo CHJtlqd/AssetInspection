@@ -74,7 +74,31 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/percent"
+                android:id="@+id/asset_check_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@+id/separat"
+                android:gravity="center"
+                android:text="1587"
+                android:textColor="#ff0000"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/separat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@+id/asset_count"
+                android:gravity="center"
+                android:text=" / "
+                android:textColor="#333333"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/asset_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -82,7 +106,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="14dp"
                 android:gravity="center"
-                android:text="1234 / 1587"
+                android:text="1587"
                 android:textColor="#333333"
                 android:textSize="22sp" />
         </RelativeLayout>
@@ -98,16 +122,19 @@
 
             <Spinner
                 android:id="@+id/search_inspection"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1.5"
                 android:entries="@array/search_array_inspection"
+                android:spinnerMode="dropdown"
                 android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/search_text"
-                android:layout_width="252dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="19dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
                 android:hint="검색 조건"
                 android:inputType="textPersonName"
                 android:textColorHint="#999999"

@@ -17,14 +17,16 @@ import androidx.lifecycle.Observer;
 
 import com.bnk.test.assetinspection.Entity.AxSvymTmrd;
 import com.bnk.test.assetinspection.Entity.InfoAndItmqAndFaxmCgp;
-import com.bnk.test.assetinspection.Util.DateUtil;
 
 import java.util.List;
 
 public class  Inspection extends AppCompatActivity {
     // 총 대상항목 수
     private int assetCount;
-    private TextView tmrdNm;
+
+    // 조사확인 항목 수
+    private LiveData<Integer> assetCheckCount;
+    private TextView tmrdNm, assetCheck, assetAllCount;
     private AxSvymTmrd tmrd;
     private CardAdapter cAdapter;
     private ListView lView;
@@ -43,21 +45,23 @@ public class  Inspection extends AppCompatActivity {
 
         lView = (ListView) findViewById(R.id.list_item);
         tmrdNm = (TextView) findViewById(R.id.textView);
+        assetCheck = findViewById(R.id.asset_check_count);
+        assetAllCount = findViewById(R.id.asset_count);
+
+        // 조회조건 spinner
         searchSpinner = findViewById(R.id.search_inspection);
-        searchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         tmrdNm.setText(tmrd.asvyTmrdNm);
         assetCount = dataBase.axSvymTrgtItmqDao().countAllTrgtItmq(tmrd.axSvymTmrdId);
+        assetAllCount.setText(String.valueOf(assetCount));
         assetList = dataBase.axSvymTrgtItmqDao().getAllInfo(tmrd.axSvymTmrdId);
+        assetCheckCount = dataBase.axSvymTrgtItmqDao().countCplTrgtItmq(tmrd.axSvymTmrdId);
+        assetCheckCount.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                assetCheck.setText(integer.toString());
+            }
+        });
 
         assetList.observe(this, new Observer<List<InfoAndItmqAndFaxmCgp>>() {
             @Override
