@@ -50,6 +50,7 @@ public interface AxSvymTrgtItmqDao {
             "      ITMQ.TRGT_STCD," +
             "      ITMQ.VD_PRSN," +
             "      EMP.EMP_NM," +
+            "      EMP.EMP_DEPT_NM," +
             "      ITMQ.AX_FAXM_INFO_ID " +
             " FROM AX_FAXM_INFO AS INFO " +
             "INNER JOIN AX_SVYM_TRGT_ITMQ AS ITMQ " +

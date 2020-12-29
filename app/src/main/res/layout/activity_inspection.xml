@@ -52,7 +52,7 @@
 
         <RelativeLayout
             android:id="@+id/progress"
-            android:layout_width="355dp"
+            android:layout_width="312dp"
             android:layout_height="46dp"
             android:layout_below="@+id/textView"
             android:layout_marginLeft="24dp"
@@ -112,7 +112,7 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="355dp"
+            android:layout_width="312dp"
             android:layout_height="40dp"
             android:layout_below="@+id/progress"
             android:layout_marginLeft="24dp"
@@ -127,17 +127,19 @@
                 android:layout_weight="1.5"
                 android:entries="@array/search_array_inspection"
                 android:spinnerMode="dropdown"
+                android:theme="@style/Theme.AppCompat.DayNight"
+                style="@android:style/Widget.Holo.Light.Spinner"
                 android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/search_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="2"
-                android:hint="검색 조건"
+                android:hint="검색어를 입력하세요."
                 android:inputType="textPersonName"
                 android:textColorHint="#999999"
+
                 android:textSize="14sp" />
         </LinearLayout>
 
