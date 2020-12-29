@@ -141,6 +141,18 @@
                 android:textColorHint="#999999"
                 android:textSize="14sp"
                 android:textColor="@color/black"/>
+
+            <Spinner
+                android:id="@+id/search_check"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:entries="@array/search_check"
+                android:spinnerMode="dropdown"
+                android:theme="@style/Theme.AppCompat.DayNight"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:textSize="14sp"
+                android:visibility="gone"/>
         </LinearLayout>
 
     </RelativeLayout>

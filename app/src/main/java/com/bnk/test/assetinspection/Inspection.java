@@ -34,7 +34,7 @@ public class Inspection extends AppCompatActivity {
     private ListView lView;
     private AppDataBase dataBase;
     private LiveData<List<InfoAndItmqAndFaxmCgp>> assetList;
-    private Spinner searchSpinner;
+    private Spinner searchSpinner,searchCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class Inspection extends AppCompatActivity {
 
         // 조회조건 spinner
         searchSpinner = findViewById(R.id.search_inspection);
+        searchCheck = findViewById(R.id.search_check);
         searchText = findViewById(R.id.search_text);
 
         tmrdNm.setText(tmrd.asvyTmrdNm);
@@ -83,6 +84,25 @@ public class Inspection extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+            }
+        });
+
+        searchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String search = (String)parent.getItemAtPosition(position);
+                if(search.equals("확인 여부")){
+                    searchText.setVisibility(View.GONE);
+                    searchCheck.setVisibility(View.VISIBLE);
+                }else{
+                    searchText.setVisibility(View.VISIBLE);
+                    searchCheck.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
