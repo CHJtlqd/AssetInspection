@@ -15,7 +15,6 @@ import com.bnk.test.assetinspection.Entity.Emp;
 
 public class Login extends AppCompatActivity {
 
-    private EditText groupNm;
     private EditText empeNo;
     private EditText password;
     private CheckBox rememberNo;
@@ -26,7 +25,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        groupNm = (EditText) findViewById(R.id.group_nm);
         empeNo = (EditText) findViewById(R.id.empe_no);
         password = (EditText) findViewById(R.id.password);
         rememberNo = (CheckBox) findViewById(R.id.remember_no);
@@ -44,7 +42,6 @@ public class Login extends AppCompatActivity {
             boolean rememberno = prefs.getBoolean("rememberNo", false);
             boolean autologin = prefs.getBoolean("autoLogin", false);
 
-            groupNm.setText(groupnm);
             if (rememberno) {
                 empeNo.setText(empeno);
                 password.setText(pwd);
@@ -84,13 +81,11 @@ public class Login extends AppCompatActivity {
 
         SharedPreferences.Editor editor = prefs.edit();
 
-        String groupnm = groupNm.getText().toString();
         String empeno = empeNo.getText().toString();
         String pwd = password.getText().toString();
         boolean rememberno = rememberNo.isChecked();
         boolean autologin = autoLogin.isChecked();
 
-        editor.putString("groupNm", groupnm);
         if (rememberno) {
             editor.putString("empeNo", empeno);
             editor.putString("password", pwd);

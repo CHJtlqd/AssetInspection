@@ -3,6 +3,8 @@ package com.bnk.test.assetinspection;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,19 +22,20 @@ import com.bnk.test.assetinspection.Entity.InfoAndItmqAndFaxmCgp;
 
 import java.util.List;
 
-public class  Inspection extends AppCompatActivity {
+public class Inspection extends AppCompatActivity {
     // 총 대상항목 수
     private int assetCount;
 
     // 조사확인 항목 수
     private LiveData<Integer> assetCheckCount;
-    private TextView tmrdNm, assetCheck, assetAllCount;
+    private TextView tmrdNm, assetCheck, assetAllCount, searchText;
     private AxSvymTmrd tmrd;
     private CardAdapter cAdapter;
     private ListView lView;
     private AppDataBase dataBase;
     private LiveData<List<InfoAndItmqAndFaxmCgp>> assetList;
     private Spinner searchSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class  Inspection extends AppCompatActivity {
 
         // 조회조건 spinner
         searchSpinner = findViewById(R.id.search_inspection);
+        searchText = findViewById(R.id.search_text);
 
         tmrdNm.setText(tmrd.asvyTmrdNm);
         assetCount = dataBase.axSvymTrgtItmqDao().countAllTrgtItmq(tmrd.axSvymTmrdId);
@@ -75,10 +79,31 @@ public class  Inspection extends AppCompatActivity {
                         Toast.makeText(Inspection.this, "선택!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
                         intent.putExtra("axFaxmInfo", cAdapter.getItem(position).axFaxmInfo);
-                        intent.putExtra("check","Inspection");
+                        intent.putExtra("check", "Inspection");
                         startActivity(intent);
                     }
                 });
+            }
+        });
+
+        // search filter
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String filterText = searchSpinner.getSelectedItem().toString() + "##" + searchText.getText();
+
+                ((CardAdapter) lView.getAdapter()).getFilter().filter(filterText);
+
             }
         });
     }

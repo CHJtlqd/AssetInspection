@@ -40,6 +40,8 @@
         android:inputType="textPersonName"
         android:textColor="#111111"
         android:textColorHint="#999999"
+        android:text="BNK 시스템"
+        android:editable="false"
         android:textSize="17dp" />
 
     <View

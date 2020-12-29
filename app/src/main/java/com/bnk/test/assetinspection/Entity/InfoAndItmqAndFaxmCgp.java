@@ -29,4 +29,7 @@ public class InfoAndItmqAndFaxmCgp {
 
     @ColumnInfo(name = "AX_FAXM_INFO_ID")
     public long axFaxmInfo;
+
+    @ColumnInfo(name = "EMP_DEPT_NM")
+    public String empDeptNm;
 }
