@@ -26,16 +26,17 @@ public class CardAdapterAsset extends BaseAdapter implements Filterable {
     public CardAdapterAsset(Context ctx, List<InfoAndItmqAndFaxmCgp> data) {
         this.ctx = ctx;
         this.data = data;
+        filteredData = data;
     }
 
     @Override
     public int getCount() {
-        return data.size();
+        return filteredData.size();
     }
 
     @Override
     public InfoAndItmqAndFaxmCgp getItem(int i) {
-        return data.get(i);
+        return filteredData.get(i);
     }
 
     @Override
@@ -70,9 +71,9 @@ public class CardAdapterAsset extends BaseAdapter implements Filterable {
             }
         });
 
-        ast_cd.setText(new StringBuilder().append(data.get(i).astCd).append("-").append(data.get(i).astDtlCd).toString());
-        ast_nm.setText(data.get(i).astNm);
-        empe_nm.setText(data.get(i).empNm);
+        ast_cd.setText(new StringBuilder().append(filteredData.get(i).astCd).append("-").append(filteredData.get(i).astDtlCd).toString());
+        ast_nm.setText(filteredData.get(i).astNm);
+        empe_nm.setText(filteredData.get(i).empNm);
 
         return view;
     }
@@ -95,20 +96,18 @@ public class CardAdapterAsset extends BaseAdapter implements Filterable {
             String searchFormat = search[0].trim();
             String searchText = null;
             if (search.length == 2) {
-                searchText = search[1];
-                Log.d("teset", "+++++++++++++" + searchText);
+                searchText = search[1].trim();
             }
 
             if (search.length == 1 || searchText == null) { // 검색어가 빈값인 경우
                 results.values = data;
                 results.count = data.size();
-                System.out.println("++++++++++???");
             } else {    // 검색을 한 경우
                 ArrayList<InfoAndItmqAndFaxmCgp> itemList = new ArrayList<>();
                 for (InfoAndItmqAndFaxmCgp item : data) {
-                    Log.d("test", "++++" + item);
+                    Log.d("test", "++++" + item+"   "+searchText+searchFormat);
 
-                    if (searchFormat.equals("담당 부서") && item.empDeptNm.contains(searchText)) {
+                    if (searchFormat.equals("담당부서") && item.empDeptNm.contains(searchText)) {
                         itemList.add(item);
                     } else if (searchFormat.equals("담당자") && item.empNm.contains(searchText)) {
                         itemList.add(item);
@@ -116,6 +115,7 @@ public class CardAdapterAsset extends BaseAdapter implements Filterable {
                         itemList.add(item);
                     }
                 }
+                Log.d("test",String.valueOf(itemList.size()));
                 results.values = itemList;
                 results.count = itemList.size();
             }

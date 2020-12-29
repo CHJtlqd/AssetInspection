@@ -139,8 +139,8 @@
                 android:hint="검색어를 입력하세요."
                 android:inputType="textPersonName"
                 android:textColorHint="#999999"
-
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
     </RelativeLayout>
