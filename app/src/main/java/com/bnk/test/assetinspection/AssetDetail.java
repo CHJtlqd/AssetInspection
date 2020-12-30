@@ -274,13 +274,14 @@ public class AssetDetail extends AppCompatActivity {
                 trgtStcdBroken.setTextColor(Color.parseColor("#333333"));
                 break;
         }
+
     }
 
     public void updateDetail(View view) {
 
         CharSequence rmrkCntnStr = rmrkCntn.getText();
         // 자산상세를 재활용하기 위해서 고정자산과 재물조사를 달리해줌 (layout setText)
-        if (intent.getStringExtra("check").equals("AssetList")) {
+         if (intent.getStringExtra("check").equals("AssetList")) {
             // 고정자산일 경우
             axFaxmInfo.setRmrkCntn(rmrkCntnStr.toString());
             new UpdateAxFaxmInfo(dataBase.axFaxmInfoDao()).execute(axFaxmInfo);
@@ -290,26 +291,8 @@ public class AssetDetail extends AppCompatActivity {
 
             // 업데이트가 필요한지 없는지 확인
             axSvymTrgtItmq.setRmrkCntn(rmrkCntnStr.toString());
-            int size = (int) file.length();
-            byte[] bytes = new byte[size];
-            try {
-                BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
-                buf.read(bytes, 0, bytes.length);
-                buf.close();
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            axSvymTrgtItmq.setPicture(bytes);
-            axFaxmCgp.flctDt = today;
-            axSvymTrgtItmq.setVdPrsn(loginUser.empNo);
-            axSvymTrgtItmq.setVdDt(today);
-            axSvymTrgtItmq.setTrgtStcd(trgtStcd);
-            new UpdateAxFaxmCgp(dataBase.axFaxmCgpDao()).execute(axFaxmCgp);
-            new UpdateAxSyvmTrgtItmq(dataBase.axSvymTrgtItmqDao()).execute(axSvymTrgtItmq);
+            axSvymTrgtItmq.trgtStcd=trgtStcd;
+            setCheck();
         }
         finish();
     }
@@ -365,6 +348,21 @@ public class AssetDetail extends AppCompatActivity {
             resultPhoto.setImageBitmap(bmp);
 
             addPhoto.setVisibility(View.GONE);
+
+            int size = (int) file.length();
+            byte[] bytes = new byte[size];
+            try {
+                BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+                buf.read(bytes, 0, bytes.length);
+                buf.close();
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            axSvymTrgtItmq.setPicture(bytes);
             intent.putExtra("check", "Inspection");
         }
     }
@@ -395,5 +393,15 @@ public class AssetDetail extends AppCompatActivity {
             mAxFaxmCgpDao.updateFaxmCgp(axFaxmCgps[0]);
             return null;
         }
+    }
+
+    private void setCheck() {
+        axFaxmCgp.flctDt = today;
+        tmrdVdDt.setText(DateUtil.dateFormat(today));
+        axSvymTrgtItmq.setVdDt(today);
+        axSvymTrgtItmq.setVdPrsn(loginUser.empNo);
+        tmrdCgpNm.setText(loginUser.empNm);
+        new UpdateAxFaxmCgp(dataBase.axFaxmCgpDao()).execute(axFaxmCgp);
+        new UpdateAxSyvmTrgtItmq(dataBase.axSvymTrgtItmqDao()).execute(axSvymTrgtItmq);
     }
 }

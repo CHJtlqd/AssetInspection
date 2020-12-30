@@ -93,6 +93,7 @@ public class CardAdapter extends BaseAdapter implements Filterable {
             if (search.length == 2) {
                 searchText = search[1].trim();
             }
+
             if (search.length == 1 || searchText == null) { // 검색어가 빈값인 경우
                 results.values = data;
                 results.count = data.size();
@@ -124,7 +125,6 @@ public class CardAdapter extends BaseAdapter implements Filterable {
 
             // update listView by filtered data list.
             filteredData = (ArrayList<InfoAndItmqAndFaxmCgp>) results.values;
-
             // notify
             if (results.count > 0) {
                 notifyDataSetChanged();
