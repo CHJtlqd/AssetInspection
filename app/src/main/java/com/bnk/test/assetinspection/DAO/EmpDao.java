@@ -28,7 +28,7 @@ public interface EmpDao {
      */
     @Query(" SELECT * " +
             "  FROM EMP " +
-            " WHERE EMP_NO = :empNo " )
+            " WHERE EMP_NO = :empNo ")
     Emp login(int empNo);
 
     @Query(" SELECT * " +
@@ -49,7 +49,6 @@ public interface EmpDao {
     Emp getTrgtItmqCgp(long axFaxmInfoId, long axSvymTmrdId);
 
 
-
     @Insert
     void insertEmp(Emp... emp);
 
@@ -63,7 +62,7 @@ public interface EmpDao {
     void insertAxFaxmCgp(AxFaxmCgp... axFaxmCgps);
 
     @Insert
-    void insertAxSvymTmrd(AxSvymTmrd...axSvymTmrds);
+    void insertAxSvymTmrd(AxSvymTmrd... axSvymTmrds);
 
     @Insert
     void insertAxSvymCgp(AxSvymCgp... axSvymCgps);

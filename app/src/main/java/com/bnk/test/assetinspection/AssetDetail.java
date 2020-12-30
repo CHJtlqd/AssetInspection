@@ -281,7 +281,7 @@ public class AssetDetail extends AppCompatActivity {
 
         CharSequence rmrkCntnStr = rmrkCntn.getText();
         // 자산상세를 재활용하기 위해서 고정자산과 재물조사를 달리해줌 (layout setText)
-         if (intent.getStringExtra("check").equals("AssetList")) {
+        if (intent.getStringExtra("check").equals("AssetList")) {
             // 고정자산일 경우
             axFaxmInfo.setRmrkCntn(rmrkCntnStr.toString());
             new UpdateAxFaxmInfo(dataBase.axFaxmInfoDao()).execute(axFaxmInfo);
@@ -291,7 +291,7 @@ public class AssetDetail extends AppCompatActivity {
 
             // 업데이트가 필요한지 없는지 확인
             axSvymTrgtItmq.setRmrkCntn(rmrkCntnStr.toString());
-            axSvymTrgtItmq.trgtStcd=trgtStcd;
+            axSvymTrgtItmq.trgtStcd = trgtStcd;
             setCheck();
         }
         finish();

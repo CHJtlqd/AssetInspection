@@ -1,7 +1,6 @@
 package com.bnk.test.assetinspection;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,8 +104,6 @@ public class CardAdapterAsset extends BaseAdapter implements Filterable {
             } else {    // 검색을 한 경우
                 ArrayList<InfoAndItmqAndFaxmCgp> itemList = new ArrayList<>();
                 for (InfoAndItmqAndFaxmCgp item : data) {
-                    Log.d("test", "++++" + item+"   "+searchText+searchFormat);
-
                     if (searchFormat.equals("담당부서") && item.empDeptNm.contains(searchText)) {
                         itemList.add(item);
                     } else if (searchFormat.equals("담당자") && item.empNm.contains(searchText)) {
@@ -115,7 +112,6 @@ public class CardAdapterAsset extends BaseAdapter implements Filterable {
                         itemList.add(item);
                     }
                 }
-                Log.d("test",String.valueOf(itemList.size()));
                 results.values = itemList;
                 results.count = itemList.size();
             }
@@ -127,7 +123,6 @@ public class CardAdapterAsset extends BaseAdapter implements Filterable {
 
             // update listView by filtered data list.
             filteredData = (ArrayList<InfoAndItmqAndFaxmCgp>) results.values;
-
 
             // notify
             if (results.count > 0) {

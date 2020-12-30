@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -75,7 +74,6 @@ public class Inspection extends AppCompatActivity {
                 lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(Inspection.this, "선택!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), AssetDetail.class);
                         intent.putExtra("axFaxmInfo", cAdapter.getItem(position).axFaxmInfo);
                         intent.putExtra("check", "Inspection");

@@ -5,7 +5,6 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -47,7 +46,7 @@ public class AxFaxcClsf {
      * 상태코드
      */
     @Ignore
-    @ColumnInfo(name ="STCD")
+    @ColumnInfo(name = "STCD")
     public String stcd;
 
     /**
@@ -189,15 +188,4 @@ public class AxFaxcClsf {
     @Ignore
     @ColumnInfo(name = "COM_CMM_SYSTEM_ID")
     public String comCmmSystemId;
-
-    @Override
-    public String toString() {
-        return "AX_FAXC_CLSF{" +
-                "axFaxcClsfId=" + axFaxcClsfId +
-                ", xpnitArtNm='" + xpnitArtNm + '\'' +
-                ", xpnitClusNm='" + xpnitClusNm + '\'' +
-                ", xpnitItemNm='" + xpnitItemNm + '\'' +
-                ", xpnitDtenNm='" + xpnitDtenNm + '\'' +
-                '}';
-    }
 }

@@ -16,6 +16,7 @@ import com.bnk.test.assetinspection.Entity.Emp;
 public interface AssetInfoDao {
     /**
      * 자산 상세조회 자산정보
+     *
      * @param axFaxmInfoId
      * @return
      */

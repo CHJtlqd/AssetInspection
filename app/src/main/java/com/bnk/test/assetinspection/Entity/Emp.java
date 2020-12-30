@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * 사원 테이블
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity(tableName = "EMP")
 public class Emp {
     /**
@@ -39,13 +41,4 @@ public class Emp {
     @NonNull
     @ColumnInfo(name = "EMP_DEPT_NM")
     public String empDeptNm;
-
-    @Override
-    public String toString() {
-        return "EMP{" +
-                "empNo=" + empNo +
-                ", empNm='" + empNm + '\'' +
-                ", empDeptNm='" + empDeptNm + '\'' +
-                '}';
-    }
 }

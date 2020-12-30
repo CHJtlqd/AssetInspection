@@ -13,7 +13,7 @@ public interface AxSvymTmrdDao {
     /**
      * 로그인 성공 후
      * 오늘 날짜를 기준으로 회차정보 조회
-     *
+     * <p>
      * 조회 후 애플리케이션 전역 객체로 등록
      *
      * @param today

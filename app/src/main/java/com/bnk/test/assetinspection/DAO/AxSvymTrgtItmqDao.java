@@ -30,6 +30,7 @@ public interface AxSvymTrgtItmqDao {
     /**
      * 전역 객체로 등록된 회차정보의 ID 값을 불러와 확인 완료된 품목의 갯수를 카운트
      * LiveData로 DB의 값이 변경되면 자동으로 값을 불러와 적용
+     *
      * @param axSvymTmrdId
      * @return
      */

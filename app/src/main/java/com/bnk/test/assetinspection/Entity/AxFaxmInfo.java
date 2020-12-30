@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * 자산관리_고정자산_기본정보
@@ -19,6 +20,7 @@ import lombok.Data;
                 childColumns = "AX_FAXC_CLSF_ID"),
 })
 @Data
+@ToString
 public class AxFaxmInfo {
     @Builder
     public AxFaxmInfo(long axfaxcClsfId, String astCd, String astNm, String astDtlCd, String mdlNm, String cmdtSn, String useYn, String rwdAplYn, String aqsDt, String flctLoc, String rmrkCntn) {
@@ -107,19 +109,4 @@ public class AxFaxmInfo {
 
     @ColumnInfo(name = "RMRK_CNTN")
     public String rmrkCntn;
-
-
-    @Override
-    public String toString() {
-        return "AX_FAXM_INFO{" +
-                "axFaxmInfoId=" + axFaxmInfoId +
-                ", axfaxcClsfId=" + axfaxcClsfId +
-                ", astCd='" + astCd + '\'' +
-                ", astNm='" + astNm + '\'' +
-                ", astDtlCd='" + astDtlCd + '\'' +
-                ", astDtlNm='" + astDtlNm + '\'' +
-                ", aqsDt='" + aqsDt + '\'' +
-                ", rmrkCntn='" + rmrkCntn + '\'' +
-                '}';
-    }
 }

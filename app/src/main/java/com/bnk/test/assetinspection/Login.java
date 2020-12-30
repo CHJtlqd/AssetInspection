@@ -1,7 +1,5 @@
 package com.bnk.test.assetinspection;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bnk.test.assetinspection.Entity.Emp;
 
@@ -20,6 +19,7 @@ public class Login extends AppCompatActivity {
     private CheckBox rememberNo;
     private CheckBox autoLogin;
     private AppDataBase dataBase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,16 +60,10 @@ public class Login extends AppCompatActivity {
         String empeno = empeNo.getText().toString();
         String pwd = password.getText().toString();
 
-//        if (!empeno.equals("123") || !pwd.equals("abc")) {
-//            Toast.makeText(v.getContext(), "아이디, 비밀번호를 확인하세요", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
         MyApplication myApplication = (MyApplication) getApplication();
         Emp loginEmp = dataBase.empDao().getEmpByEmpNo(Integer.parseInt(empeno));
         myApplication.setLoginEmp(loginEmp);
         savePref();
-
-        Toast.makeText(v.getContext(), "로그인", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(), FirstPage.class);
         startActivity(intent);

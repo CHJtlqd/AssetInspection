@@ -2,7 +2,6 @@ package com.bnk.test.assetinspection;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +121,6 @@ public class CardAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-
             // update listView by filtered data list.
             filteredData = (ArrayList<InfoAndItmqAndFaxmCgp>) results.values;
             // notify

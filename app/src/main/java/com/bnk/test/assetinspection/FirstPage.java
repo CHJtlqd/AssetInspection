@@ -1,20 +1,16 @@
 package com.bnk.test.assetinspection;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bnk.test.assetinspection.Entity.AxSvymTmrd;
-import com.bnk.test.assetinspection.Entity.Emp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class FirstPage extends AppCompatActivity {
     private AppDataBase dataBase;
@@ -46,7 +42,7 @@ public class FirstPage extends AppCompatActivity {
         sb.append("조사기간  ");
         sb.append(axSvymTmrd.asvyYy).append(". ").append(axSvymTmrd.strdt.substring(4, 6)).append(". ").append(axSvymTmrd.strdt.substring(6, 8));
         sb.append(" ~ ");
-        sb.append(axSvymTmrd.edt.substring(0,4)).append(". ").append(axSvymTmrd.edt.substring(4,6)).append(". ").append(axSvymTmrd.edt.substring(6,8));
+        sb.append(axSvymTmrd.edt.substring(0, 4)).append(". ").append(axSvymTmrd.edt.substring(4, 6)).append(". ").append(axSvymTmrd.edt.substring(6, 8));
         tmrdPeriod.setText(sb.toString());
 
         MyApplication myApp = (MyApplication) getApplication();
@@ -54,15 +50,11 @@ public class FirstPage extends AppCompatActivity {
     }
 
     public void inspection(View v) {
-        Toast.makeText(v.getContext(), "재물조사", Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(getApplicationContext(), Inspection.class);
         startActivity(intent);
     }
 
     public void listAllAssets(View v) {
-        Toast.makeText(v.getContext(), "자산목록", Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(getApplicationContext(), AssetList.class);
         startActivity(intent);
     }
