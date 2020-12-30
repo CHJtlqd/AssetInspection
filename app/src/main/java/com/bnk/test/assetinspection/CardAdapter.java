@@ -91,25 +91,21 @@ public class CardAdapter extends BaseAdapter implements Filterable {
             String searchFormat = search[0].trim();
             String searchText = null;
             if (search.length == 2) {
-                searchText = search[1];
-                Log.d("teset", "+++++++++++++" + searchText);
+                searchText = search[1].trim();
             }
-
             if (search.length == 1 || searchText == null) { // 검색어가 빈값인 경우
                 results.values = data;
                 results.count = data.size();
             } else {    // 검색을 한 경우
                 ArrayList<InfoAndItmqAndFaxmCgp> itemList = new ArrayList<>();
                 for (InfoAndItmqAndFaxmCgp item : data) {
-                    Log.d("test","++++"+item);
-
-                    if (searchFormat.equals("확인 여부")) {
+                    if (searchFormat.equals("확인여부")) {
                         if (searchText.equals("확인") && item.vdDt != null) {
                             itemList.add(item);
                         } else if (searchText.equals("미확인") && item.vdDt == null) {
                             itemList.add(item);
                         }
-                    } else if (searchFormat.equals("담당 부서") && item.empDeptNm.contains(searchText)) {
+                    } else if (searchFormat.equals("담당부서") && item.empDeptNm.contains(searchText)) {
                         itemList.add(item);
                     } else if (searchFormat.equals("담당자") && item.empNm.contains(searchText)) {
                         itemList.add(item);

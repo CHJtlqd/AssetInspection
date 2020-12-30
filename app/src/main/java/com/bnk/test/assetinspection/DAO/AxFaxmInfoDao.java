@@ -16,7 +16,8 @@ public interface AxFaxmInfoDao {
             "       INFO.AST_CD," +
             "       INFO.AST_DTL_CD, " +
             "       INFO.AST_NM, " +
-            "       EMP.EMP_NM" +
+            "       EMP.EMP_NM," +
+            "       EMP.EMP_DEPT_NM" +
             "  FROM AX_FAXM_INFO AS INFO " +
             " INNER JOIN AX_FAXM_CGP AS CGP " +
             "    ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +

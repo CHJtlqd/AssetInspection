@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,7 +35,7 @@ public class Inspection extends AppCompatActivity {
     private ListView lView;
     private AppDataBase dataBase;
     private LiveData<List<InfoAndItmqAndFaxmCgp>> assetList;
-    private Spinner searchSpinner;
+    private Spinner searchSpinner,searchCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class Inspection extends AppCompatActivity {
 
         // 조회조건 spinner
         searchSpinner = findViewById(R.id.search_inspection);
+        searchCheck = findViewById(R.id.search_check);
         searchText = findViewById(R.id.search_text);
 
         tmrdNm.setText(tmrd.asvyTmrdNm);
@@ -86,6 +88,45 @@ public class Inspection extends AppCompatActivity {
             }
         });
 
+        searchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String search = (String)parent.getItemAtPosition(position);
+                if(search.equals("확인 여부")){
+                    searchText.setVisibility(View.GONE);
+                    searchCheck.setVisibility(View.VISIBLE);
+                }else{
+                    searchText.setVisibility(View.VISIBLE);
+                    searchCheck.setVisibility(View.GONE);
+                    searchText.setText("");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        searchCheck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String search = (String)parent.getItemAtPosition(position);
+                if(search.equals("확인")){
+                    String filterText = searchSpinner.getSelectedItem().toString() + "##확인";
+                    ((CardAdapter) lView.getAdapter()).getFilter().filter(filterText);
+                }else if(search.equals("미확인")){
+                    String filterText = searchSpinner.getSelectedItem().toString() + "##미확인";
+                    ((CardAdapter) lView.getAdapter()).getFilter().filter(filterText);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         // search filter
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -101,9 +142,7 @@ public class Inspection extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String filterText = searchSpinner.getSelectedItem().toString() + "##" + searchText.getText();
-
                 ((CardAdapter) lView.getAdapter()).getFilter().filter(filterText);
-
             }
         });
     }
