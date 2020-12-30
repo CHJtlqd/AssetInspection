@@ -93,7 +93,6 @@ public class CardAdapter extends BaseAdapter implements Filterable {
             if (search.length == 2) {
                 searchText = search[1].trim();
             }
-
             if (search.length == 1 || searchText == null) { // 검색어가 빈값인 경우
                 results.values = data;
                 results.count = data.size();

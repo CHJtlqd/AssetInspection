@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -97,6 +98,26 @@ public class Inspection extends AppCompatActivity {
                 }else{
                     searchText.setVisibility(View.VISIBLE);
                     searchCheck.setVisibility(View.GONE);
+                    searchText.setText("");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        searchCheck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String search = (String)parent.getItemAtPosition(position);
+                if(search.equals("확인")){
+                    String filterText = searchSpinner.getSelectedItem().toString() + "##확인";
+                    ((CardAdapter) lView.getAdapter()).getFilter().filter(filterText);
+                }else if(search.equals("미확인")){
+                    String filterText = searchSpinner.getSelectedItem().toString() + "##미확인";
+                    ((CardAdapter) lView.getAdapter()).getFilter().filter(filterText);
                 }
             }
 
@@ -121,9 +142,7 @@ public class Inspection extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String filterText = searchSpinner.getSelectedItem().toString() + "##" + searchText.getText();
-
                 ((CardAdapter) lView.getAdapter()).getFilter().filter(filterText);
-
             }
         });
     }
