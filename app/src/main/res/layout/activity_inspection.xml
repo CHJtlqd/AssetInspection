@@ -122,14 +122,15 @@
 
             <Spinner
                 android:id="@+id/search_inspection"
+                style="@android:style/Widget.Holo.Light.Spinner"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
+                android:dropDownVerticalOffset="28dp"
                 android:entries="@array/search_array_inspection"
                 android:spinnerMode="dropdown"
-                android:theme="@style/Theme.AppCompat.DayNight"
-                style="@android:style/Widget.Holo.Light.Spinner"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:theme="@style/Theme.AppCompat.DayNight" />
 
             <EditText
                 android:id="@+id/search_text"
@@ -138,21 +139,22 @@
                 android:layout_weight="2"
                 android:hint="검색어를 입력하세요."
                 android:inputType="textPersonName"
+                android:textColor="@color/black"
                 android:textColorHint="#999999"
-                android:textSize="14sp"
-                android:textColor="@color/black"/>
+                android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/search_check"
+                style="@android:style/Widget.Holo.Light.Spinner"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:dropDownVerticalOffset="28dp"
                 android:entries="@array/search_check"
                 android:spinnerMode="dropdown"
-                android:theme="@style/Theme.AppCompat.DayNight"
-                style="@android:style/Widget.Holo.Light.Spinner"
                 android:textSize="14sp"
-                android:visibility="gone"/>
+                android:theme="@style/Theme.AppCompat.DayNight"
+                android:visibility="gone" />
         </LinearLayout>
 
     </RelativeLayout>
