@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,7 +57,7 @@ public class AssetDetail extends AppCompatActivity {
     private Emp tmrdCgp, cgp, loginUser;
     private AxFaxmCgp axFaxmCgp;
     private RelativeLayout relTmrdVdDt, relTmrdCgpNm, relInfoVdDt;
-    private LinearLayout trgtStcdLayout;
+    private LinearLayout trgtStcdLayout, assetYnBtnLayout;
     private Intent intent;
     private AxFaxmInfo axFaxmInfo;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -77,10 +78,15 @@ public class AssetDetail extends AppCompatActivity {
         dataBase = AppDataBase.getInstance(this);
 
         // INIT
+        // 보수 신청 반납신청
+        assetYnBtnLayout = findViewById(R.id.asset_yn_btn_layout);
+
+        // 대상상태
         trgtStcdLayout = findViewById(R.id.trgt_stcd_layout);
         trgtStcdNormal = findViewById(R.id.trgt_stcd_normal);
         trgtStcdBroken = findViewById(R.id.trgt_stcd_borken);
         trgtStcd = "01";
+
         // 자산정보
         astFlctLoc = findViewById(R.id.ast_flct_loc);
         astDtlCd = findViewById(R.id.ast_dtl_cd);
@@ -171,6 +177,7 @@ public class AssetDetail extends AppCompatActivity {
             if (axSvymTrgtItmq.rmrkCntn != null) {
                 rmrkCntn.setText(axSvymTrgtItmq.rmrkCntn);
             }
+            assetYnBtnLayout.setVisibility(View.GONE);
             relInfoVdDt.setVisibility(View.GONE);
             if (tmrdCgp != null) {
                 tmrdCgpNm.setText(tmrdCgp.empNm);
@@ -204,6 +211,8 @@ public class AssetDetail extends AppCompatActivity {
                 } else {
                     trgtStcdOnClick(trgtStcdBroken);
                 }
+            } else {
+                trgtStcdOnClick(resultPhoto);
             }
         }
 
@@ -218,14 +227,14 @@ public class AssetDetail extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.trgt_stcd_normal:
                 trgtStcd = "01";
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     trgtStcdBroken.setBackground(ContextCompat.getDrawable(this, R.drawable.border));
                 } else {
                     trgtStcdBroken.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border));
                 }
                 trgtStcdBroken.setTextColor(Color.parseColor("#333333"));
 
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     trgtStcdNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.border_select));
                 } else {
                     trgtStcdNormal.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border_select));
@@ -234,19 +243,35 @@ public class AssetDetail extends AppCompatActivity {
                 break;
             case R.id.trgt_stcd_borken:
                 trgtStcd = "02";
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     trgtStcdNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.border));
                 } else {
                     trgtStcdNormal.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border));
                 }
                 trgtStcdNormal.setTextColor(Color.parseColor("#333333"));
 
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     trgtStcdBroken.setBackground(ContextCompat.getDrawable(this, R.drawable.border_select));
                 } else {
                     trgtStcdBroken.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border_select));
                 }
                 trgtStcdBroken.setTextColor(Color.parseColor("#CB2B11"));
+                break;
+            default:
+                trgtStcd = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    trgtStcdNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.border));
+                } else {
+                    trgtStcdNormal.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border));
+                }
+                trgtStcdNormal.setTextColor(Color.parseColor("#333333"));
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    trgtStcdBroken.setBackground(ContextCompat.getDrawable(this, R.drawable.border));
+                } else {
+                    trgtStcdBroken.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.border));
+                }
+                trgtStcdBroken.setTextColor(Color.parseColor("#333333"));
                 break;
         }
     }
@@ -287,6 +312,17 @@ public class AssetDetail extends AppCompatActivity {
             new UpdateAxSyvmTrgtItmq(dataBase.axSvymTrgtItmqDao()).execute(axSvymTrgtItmq);
         }
         finish();
+    }
+
+    public void requestBtnOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_rwd_apl_yn:
+                Toast.makeText(this, "보수신청 추후 업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_return_yn:
+                Toast.makeText(this, "반납신청 추후 업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     public static class UpdateAxSyvmTrgtItmq extends AsyncTask<AxSvymTrgtItmq, Void, Void> {

@@ -70,11 +70,11 @@ public class InsertDataActivity extends AppCompatActivity {
 
     private AxSvymTmrd[] tmrds = {AxSvymTmrd.builder().asvyTmrd(1).asvyTmrdNm("제 1회차 재물조사").asvyYy("2020").edt("20210131").strdt(today).tmrdStcd("02").vdDt("20210116").build()};
 
-    private AxSvymTrgtItmq[] trgtItmqs = {AxSvymTrgtItmq.builder().axFaxmInfoId(1).axSvymTmrdId(1).trgtStcd("01").vdApln(2021120).build(),
-            AxSvymTrgtItmq.builder().axFaxmInfoId(3).axSvymTmrdId(1).trgtStcd("01").vdApln(2021120).build(),
-            AxSvymTrgtItmq.builder().axFaxmInfoId(5).axSvymTmrdId(1).trgtStcd("01").vdApln(2021120).build(),
-            AxSvymTrgtItmq.builder().axFaxmInfoId(7).axSvymTmrdId(1).trgtStcd("01").vdApln(2021120).build(),
-            AxSvymTrgtItmq.builder().axFaxmInfoId(9).axSvymTmrdId(1).trgtStcd("01").vdApln(2021120).build()};
+    private AxSvymTrgtItmq[] trgtItmqs = {AxSvymTrgtItmq.builder().axFaxmInfoId(1).axSvymTmrdId(1).vdApln(2021120).build(),
+            AxSvymTrgtItmq.builder().axFaxmInfoId(3).axSvymTmrdId(1).vdApln(2021120).build(),
+            AxSvymTrgtItmq.builder().axFaxmInfoId(5).axSvymTmrdId(1).vdApln(2021120).build(),
+            AxSvymTrgtItmq.builder().axFaxmInfoId(7).axSvymTmrdId(1).vdApln(2021120).build(),
+            AxSvymTrgtItmq.builder().axFaxmInfoId(9).axSvymTmrdId(1).vdApln(2021120).build()};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

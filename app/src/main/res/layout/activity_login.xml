@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/login"
@@ -40,6 +42,8 @@
         android:inputType="textPersonName"
         android:textColor="#111111"
         android:textColorHint="#999999"
+        android:text="BNK 시스템"
+        android:editable="false"
         android:textSize="17dp" />
 
     <View
