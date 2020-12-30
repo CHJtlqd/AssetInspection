@@ -59,7 +59,8 @@ public interface AxSvymTrgtItmqDao {
             "   ON INFO.AX_FAXM_INFO_ID = CGP.AX_FAXM_INFO_ID " +
             "INNER JOIN EMP " +
             "   ON CGP.CGP_ID = EMP.EMP_NO " +
-            "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId ")
+            "WHERE ITMQ.AX_SVYM_TMRD_ID = :axSvymTmrdId " +
+            "ORDER BY VD_DT ")
     LiveData<List<InfoAndItmqAndFaxmCgp>> getAllInfo(long axSvymTmrdId);
 
     /**

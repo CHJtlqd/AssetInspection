@@ -46,6 +46,8 @@ public class AssetList extends AppCompatActivity {
                 cAdapter = new CardAdapterAsset(AssetList.this, infoAndItmqAndFaxmCgps);
                 lView.setAdapter(cAdapter);
 
+
+
                 lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -54,6 +56,15 @@ public class AssetList extends AppCompatActivity {
                         intent.putExtra("axFaxmInfo", cAdapter.getItem(position).axFaxmInfo);
                         intent.putExtra("check", "AssetList");
                         startActivity(intent);
+                    }
+                });
+
+                searchSpinner.setSelection(searchSpinner.getSelectedItemPosition());
+                searchText.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String filterText = searchSpinner.getSelectedItem().toString() + "##" + searchText.getText();
+                        ((CardAdapterAsset) lView.getAdapter()).getFilter().filter(filterText);
                     }
                 });
             }

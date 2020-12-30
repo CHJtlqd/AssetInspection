@@ -473,33 +473,31 @@
                     android:textColor="#111111"
                     android:textSize="16sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#939393" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
                     <Button
                         android:id="@+id/trgt_stcd_normal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/border"
                         android:layout_weight="1"
-                        android:textColor="#333333"
+                        android:background="@drawable/border"
+                        android:onClick="trgtStcdOnClick"
                         android:text="이상없음"
-                        android:onClick="trgtStcdOnClick"/>
+                        android:textColor="#333333" />
+
                     <Button
                         android:id="@+id/trgt_stcd_borken"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/border"
                         android:layout_weight="1"
-                        android:textColor="#333333"
+                        android:background="@drawable/border"
+                        android:onClick="trgtStcdOnClick"
                         android:text="부품고장"
-                        android:onClick="trgtStcdOnClick"/>
+                        android:textColor="#333333" />
                 </LinearLayout>
 
 
@@ -516,8 +514,9 @@
                     android:id="@+id/add_photo"
                     android:layout_width="match_parent"
                     android:layout_height="174dp"
+                    android:background="@drawable/border"
                     android:onClick="capture"
-                    app:srcCompat="@android:drawable/ic_menu_add" />
+                    app:srcCompat="@android:drawable/ic_menu_camera" />
 
                 <ImageView
                     android:id="@+id/result_photo"
@@ -551,9 +550,10 @@
                     android:id="@+id/rmrk_cntn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="13dp"
-                    android:textColor="#333333"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="#666666"
                     android:hint="내용을 입력하세요."
+                    android:textColor="#333333"
                     android:textSize="14sp" />
 
                 <View
@@ -561,41 +561,44 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="13dp"
                     android:background="#DDDDDD" />
+
                 <LinearLayout
                     android:id="@+id/asset_yn_btn_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:orientation="vertical"
                     android:focusable="true"
-                    android:focusableInTouchMode="true">
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical">
+
                     <Button
                         android:id="@+id/btn_rwd_apl_yn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/border"
-                        android:textColor="#333333"
+                        android:onClick="requestBtnOnClick"
                         android:text="보수신청"
-                        android:textSize="18sp"
-                        android:onClick="requestBtnOnClick"/>
+                        android:textColor="#333333"
+                        android:textSize="18sp" />
+
                     <Button
                         android:id="@+id/btn_return_yn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/border"
-                        android:textColor="#333333"
+                        android:onClick="requestBtnOnClick"
                         android:text="반납신청"
-                        android:textSize="18sp"
-                        android:onClick="requestBtnOnClick"/>
+                        android:textColor="#333333"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
+                    android:layout_marginTop="20dp"
                     android:background="#CB2B11"
                     android:onClick="updateDetail"
-                    android:layout_marginTop="20dp"
                     android:text="확인"
                     android:textSize="18dp" />
             </LinearLayout>
